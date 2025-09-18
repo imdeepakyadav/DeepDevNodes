@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepDevNodes API - Comprehensive Developer API Hub</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            line-height: 1.6;
+            color: #e0e0e0;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 25%, #16213e 50%, #0f0f23 75%, #000000 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 255, 198, 0.2) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            text-align: center;
+            color: #ffffff;
+            padding: 80px 0 60px;
+            position: relative;
+        }
+
+        .header h1 {
+            font-family: 'Orbitron', monospace;
+            font-size: 4rem;
+            margin-bottom: 20px;
+            font-weight: 800;
+            background: linear-gradient(45deg, #00d4ff, #ff6b6b, #4ecdc4, #45b7d1);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 3s ease infinite;
+            text-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+            letter-spacing: 2px;
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .header p {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+            color: #b8c5d6;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin: 50px 0;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            min-width: 140px;
+            transition: all 0.3s ease;
+        }
+
+        .stat:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+            border-color: rgba(0, 212, 255, 0.3);
+        }
+
+        .stat-number {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.8rem;
+            font-weight: 700;
+            display: block;
+            color: #00d4ff;
+            margin-bottom: 5px;
+            text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+        }
+
+        .stat-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #8892a0;
+        }
+
+        .api-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+
+        .api-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .api-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #00d4ff, #ff6b6b, #4ecdc4);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .api-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .api-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0, 212, 255, 0.2);
+            border-color: rgba(0, 212, 255, 0.3);
+        }
+
+        .api-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+            position: relative;
+        }
+
+        .api-icon::after {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 17px;
+            background: linear-gradient(45deg, #00d4ff, #ff6b6b, #4ecdc4, #45b7d1);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .api-card:hover .api-icon::after {
+            opacity: 1;
+        }
+
+        .api-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 18px;
+            color: #ffffff;
+            letter-spacing: 1px;
+        }
+
+        .api-description {
+            color: #b8c5d6;
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        .endpoint {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 14px 18px;
+            border-radius: 10px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            margin: 10px 0;
+            border-left: 4px solid #00d4ff;
+            color: #e0e0e0;
+            transition: all 0.3s ease;
+        }
+
+        .endpoint:hover {
+            background: rgba(0, 212, 255, 0.1);
+            border-color: rgba(0, 212, 255, 0.3);
+        }
+
+        .method {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-right: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .method.get {
+            background: linear-gradient(45deg, #00d4ff, #0099cc);
+            color: white;
+            box-shadow: 0 2px 10px rgba(0, 212, 255, 0.3);
+        }
+
+        .method.post {
+            background: linear-gradient(45deg, #ff6b6b, #cc3333);
+            color: white;
+            box-shadow: 0 2px 10px rgba(255, 107, 107, 0.3);
+        }
+
+        .features {
+            margin-top: 25px;
+        }
+
+        .features h4 {
+            font-family: 'Orbitron', monospace;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            color: #00d4ff;
+            letter-spacing: 1px;
+        }
+
+        .features ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .features li {
+            padding: 6px 0;
+            font-size: 0.9rem;
+            color: #b8c5d6;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .features li:before {
+            content: "⚡";
+            position: absolute;
+            left: 0;
+            color: #00d4ff;
+            font-weight: bold;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 50px 0 30px;
+            color: #ffffff;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 60px;
+        }
+
+        .footer p {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        .footer a {
+            color: #00d4ff;
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: 500;
+            font-family: 'JetBrains Mono', monospace;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .footer a:hover {
+            color: #ff6b6b;
+            text-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+        }
+
+        .footer a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(45deg, #00d4ff, #ff6b6b);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .footer a:hover::after {
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.8rem;
+            }
+
+            .api-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .stats {
+                gap: 20px;
+            }
+
+            .stat {
+                min-width: 120px;
+                padding: 20px;
+            }
+
+            .stat-number {
+                font-size: 2.2rem;
+            }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, #00d4ff, #ff6b6b);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(45deg, #0099cc, #cc3333);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="particles-js"></div>
+
+    <div class="container">
+        <header class="header">
+            <h1>🚀 DeepDevNodes</h1>
+            <p>A comprehensive REST API providing access to various data sources including financial data, space
+                information, GitHub statistics, and more. Built with Node.js and Express.js for high performance and
+                scalability.</p>
+
+            <div class="stats">
+                <div class="stat">
+                    <span class="stat-number">10+</span>
+                    <span class="stat-label">API Categories</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">50+</span>
+                    <span class="stat-label">Endpoints</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">233</span>
+                    <span class="stat-label">Data Records</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">24/7</span>
+                    <span class="stat-label">Uptime</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="api-grid">
+            <!-- Countries API -->
+            <div class="api-card">
+                <div class="api-icon">🌍</div>
+                <h3 class="api-title">Countries API</h3>
+                <p class="api-description">Comprehensive country data with detailed information including capitals,
+                    currencies, languages, and geographical data.</p>
+
+                <div class="endpoint">
+                    <span class="method get">GET</span>/api/countries
+                </div>
+                <div class="endpoint">
+                    <span class="method get">GET</span>/api/countries/{code}
+                </div>
+
+                <div class="features">
+                    <h4>Features</h4>
+                    <ul>
+                        <li>195+ countries data</li>
+                        <li>Search by name/capital</li>
+                        <li>Filter by region/currency</li>
+                        <li>Pagination support</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Finance API -->
+            <div class="api-card">
+                <div class="api-icon">💰</div>
+                <h3 class="api-title">Finance API</h3>
+                <p class="api-description">Real-time cryptocurrency and stock market data with conversion capabilities
+                    and market insights.</p>
+
+                <div class="endpoint">
+                    <span class="method get">GET</span>/api/crypto
+                </div>
+                <div class="endpoint">
+                    <span class="method get">GET</span>/api/stocks
+                </div>
+                <div class="endpoint">
+                    <span class="method get">GET</span>/api/convert?from=USD&to=EUR&amount=100
+                </div>
+
+                <div class="features">
+                    <h4>Features</h4>
+                    <ul>
+                        <li>1000+ cryptocurrencies</li>
+                        <li>Real-time stock prices</li>
+                        <li>Currency conversion</li>
+                        <li>Market cap rankings</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Developer API -->
+            <div class="api-card">
+                <div class="api-icon">👨‍💻</div>
+                <h3 class="api-title">Developer API</h3>
+                <p class="api-description">Developer-focused data including trending GitHub repositories, NPM packages,
+                    and Stack Overflow questions.</p>
+
+                <div class="endpoint">
+                    <span class="method get">GET</span>/api/developer/github-trending
+                </div>
+                <div class="endpoint">
+                    <span class="method get">GET</span>/api/developer/npm-trending
+                </div>
+                <div class="endpoint">
+                    <span class="method get">GET</span>/api/developer/stackoverflow-trending
+                </div>
+
+                <div class="features">
+                    <h4>Features</h4>
+                    <ul>
+                        <li>GitHub trending repos</li>
+                        <li>NPM package trends</li>
+                        <li>Stack Overflow questions</li>
+                        <li>Language filtering</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Space API -->
+            <div class="api-card">
+                <div class="api-icon">🚀</div>
+                <h3 class="api-title">Space API</h3>
+                <p class="api-description">Space exploration data including NASA APOD, planetary information, and space
+                    launch schedules.</p>
+
+                <div class="endpoint">
+                    <span class="method get">GET</span>/api/space/apod
+                </div>
+                <div class="endpoint">
+                    <span class="method get">GET</span>/api/space/planets
+                </div>
+                <div class="endpoint">
+                    <span class="method get">GET</span>/api/space/launches
+                </div>
+
+                <div class="features">
+                    <h4>Features</h4>
+                    <ul>
+                        <li>NASA Astronomy Picture of the Day</li>
+                        <li>Solar system planets data</li>
+                        <li>Space launch schedules</li>
+                        <li>Real-time mission updates</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Fun APIs -->
+            <div class="api-card">
+                <div class="api-icon">🎭</div>
+                <h3 class="api-title">Fun APIs</h3>
+                <p class="api-description">Entertainment and utility APIs including jokes, quotes, facts, and various
+                    fun data sources.</p>
+
+                <div class="endpoint">
+                    <span class="method get">GET</span>/api/jokes
+                </div>
+                <div class="endpoint">
+                    <span class="method get">GET</span>/api/quotes
+                </div>
+                <div class="endpoint">
+                    <span class="method get">GET</span>/api/facts
+                </div>
+
+                <div class="features">
+                    <h4>Features</h4>
+                    <ul>
+                        <li>1000+ programming jokes</li>
+                        <li>Inspirational quotes</li>
+                        <li>Interesting facts</li>
+                        <li>Random content generation</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Utilities API -->
+            <div class="api-card">
+                <div class="api-icon">🛠️</div>
+                <h3 class="api-title">Utilities API</h3>
+                <p class="api-description">Developer utilities including UUID generation, random number generation, and
+                    various helper functions.</p>
+
+                <div class="endpoint">
+                    <span class="method get">GET</span>/api/utilities/uuid
+                </div>
+                <div class="endpoint">
+                    <span class="method get">GET</span>/api/utilities/random?min=1&max=100
+                </div>
+
+                <div class="features">
+                    <h4>Features</h4>
+                    <ul>
+                        <li>UUID v4 generation</li>
+                        <li>Random number generation</li>
+                        <li>Utility functions</li>
+                        <li>Developer tools</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Time API -->
+            <div class="api-card">
+                <div class="api-icon">⏰</div>
+                <h3 class="api-title">Time API</h3>
+                <p class="api-description">Time and date utilities with timezone support and various time-related
+                    functions.</p>
+
+                <div class="endpoint">
+                    <span class="method get">GET</span>/api/time/now
+                </div>
+                <div class="endpoint">
+                    <span class="method get">GET</span>/api/time/zones
+                </div>
+
+                <div class="features">
+                    <h4>Features</h4>
+                    <ul>
+                        <li>Current time worldwide</li>
+                        <li>Timezone conversion</li>
+                        <li>Date formatting</li>
+                        <li>Time utilities</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- IP API -->
+            <div class="api-card">
+                <div class="api-icon">📡</div>
+                <h3 class="api-title">IP API</h3>
+                <p class="api-description">IP address information and geolocation data with detailed network
+                    information.</p>
+
+                <div class="endpoint">
+                    <span class="method get">GET</span>/api/ip/info
+                </div>
+                <div class="endpoint">
+                    <span class="method get">GET</span>/api/ip/{ip_address}
+                </div>
+
+                <div class="features">
+                    <h4>Features</h4>
+                    <ul>
+                        <li>IP geolocation</li>
+                        <li>Network information</li>
+                        <li>ISP details</li>
+                        <li>Location data</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Currency API -->
+            <div class="api-card">
+                <div class="api-icon">💱</div>
+                <h3 class="api-title">Currency API</h3>
+                <p class="api-description">Currency exchange rates and conversion tools with real-time financial data.
+                </p>
+
+                <div class="endpoint">
+                    <span class="method get">GET</span>/api/currency/rates
+                </div>
+                <div class="endpoint">
+                    <span class="method get">GET</span>/api/currency/convert
+                </div>
+
+                <div class="features">
+                    <h4>Features</h4>
+                    <ul>
+                        <li>Real-time exchange rates</li>
+                        <li>Multi-currency support</li>
+                        <li>Historical data</li>
+                        <li>Conversion tools</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Facts API -->
+            <div class="api-card">
+                <div class="api-icon">📚</div>
+                <h3 class="api-title">Facts API</h3>
+                <p class="api-description">Collection of interesting facts across various categories including science,
+                    history, and general knowledge.</p>
+
+                <div class="endpoint">
+                    <span class="method get">GET</span>/api/facts
+                </div>
+                <div class="endpoint">
+                    <span class="method get">GET</span>/api/facts/random
+                </div>
+
+                <div class="features">
+                    <h4>Features</h4>
+                    <ul>
+                        <li>1000+ interesting facts</li>
+                        <li>Categorized content</li>
+                        <li>Random fact generation</li>
+                        <li>Educational content</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>Built with ❤️ by <a href="https://github.com/imdeepakyadav" target="_blank">Deepak Yadav</a></p>
+            <div style="margin-top: 20px;">
+                <a href="/docs">📚 API Documentation</a>
+                <a href="https://github.com/imdeepakyadav/deepdevnodes" target="_blank">🐙 GitHub</a>
+                <a href="/health">❤️ Health Check</a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Particles.js -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        particlesJS('particles-js', {
+            particles: {
+                number: {
+                    value: 80,
+                    density: {
+                        enable: true,
+                        value_area: 800
+                    }
+                },
+                color: {
+                    value: ['#00d4ff', '#ff6b6b', '#4ecdc4', '#ffffff']
+                },
+                shape: {
+                    type: ['circle', 'triangle', 'edge'],
+                    stroke: {
+                        width: 0,
+                        color: '#000000'
+                    },
+                    polygon: {
+                        nb_sides: 5
+                    }
+                },
+                opacity: {
+                    value: 0.5,
+                    random: true,
+                    anim: {
+                        enable: true,
+                        speed: 1,
+                        opacity_min: 0.1,
+                        sync: false
+                    }
+                },
+                size: {
+                    value: 3,
+                    random: true,
+                    anim: {
+                        enable: true,
+                        speed: 2,
+                        size_min: 0.1,
+                        sync: false
+                    }
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: '#00d4ff',
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: 'none',
+                    random: true,
+                    straight: false,
+                    out_mode: 'out',
+                    bounce: false,
+                    attract: {
+                        enable: false,
+                        rotateX: 600,
+                        rotateY: 1200
+                    }
+                }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: 'repulse'
+                    },
+                    onclick: {
+                        enable: true,
+                        mode: 'push'
+                    },
+                    resize: true
+                },
+                modes: {
+                    grab: {
+                        distance: 400,
+                        line_linked: {
+                            opacity: 1
+                        }
+                    },
+                    bubble: {
+                        distance: 400,
+                        size: 40,
+                        duration: 2,
+                        opacity: 8,
+                        speed: 3
+                    },
+                    repulse: {
+                        distance: 200,
+                        duration: 0.4
+                    },
+                    push: {
+                        particles_nb: 4
+                    },
+                    remove: {
+                        particles_nb: 2
+                    }
+                }
+            },
+            retina_detect: true
+        });
+    </script>
+</body>
+
+</html>
