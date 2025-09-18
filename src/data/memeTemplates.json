@@ -1,0 +1,142 @@
+[
+  {
+    "id": "drake",
+    "name": "Drake Hotline Bling",
+    "description": "Drake disapproving and approving",
+    "template_url": "https://i.imgflip.com/30b1gx.jpg",
+    "text_boxes": [
+      {
+        "id": "top",
+        "text": "Things that are disappointing",
+        "x": 50,
+        "y": 50,
+        "width": 400,
+        "height": 100,
+        "color": "#ffffff",
+        "font_size": 24
+      },
+      {
+        "id": "bottom",
+        "text": "Things that are awesome",
+        "x": 50,
+        "y": 350,
+        "width": 400,
+        "height": 100,
+        "color": "#ffffff",
+        "font_size": 24
+      }
+    ]
+  },
+  {
+    "id": "distracted-boyfriend",
+    "name": "Distracted Boyfriend",
+    "description": "Guy looking at another girl while his girlfriend looks angry",
+    "template_url": "https://i.imgflip.com/1ur9b0.jpg",
+    "text_boxes": [
+      {
+        "id": "boyfriend",
+        "text": "Me",
+        "x": 200,
+        "y": 50,
+        "width": 150,
+        "height": 50,
+        "color": "#ffffff",
+        "font_size": 20
+      },
+      {
+        "id": "girlfriend",
+        "text": "Current project",
+        "x": 50,
+        "y": 100,
+        "width": 150,
+        "height": 50,
+        "color": "#ffffff",
+        "font_size": 20
+      },
+      {
+        "id": "other_girl",
+        "text": "New shiny framework",
+        "x": 350,
+        "y": 100,
+        "width": 150,
+        "height": 50,
+        "color": "#ffffff",
+        "font_size": 20
+      }
+    ]
+  },
+  {
+    "id": "success-kid",
+    "name": "Success Kid",
+    "description": "Baby fist pumping with determination",
+    "template_url": "https://i.imgflip.com/1bgw.jpg",
+    "text_boxes": [
+      {
+        "id": "top",
+        "text": "When your code finally works",
+        "x": 50,
+        "y": 50,
+        "width": 400,
+        "height": 100,
+        "color": "#ffffff",
+        "font_size": 24
+      },
+      {
+        "id": "bottom",
+        "text": "After 3 hours of debugging",
+        "x": 50,
+        "y": 350,
+        "width": 400,
+        "height": 100,
+        "color": "#ffffff",
+        "font_size": 24
+      }
+    ]
+  },
+  {
+    "id": "this-is-fine",
+    "name": "This is Fine",
+    "description": "Dog in burning room saying 'This is fine'",
+    "template_url": "https://i.imgflip.com/2/1bgw.jpg",
+    "text_boxes": [
+      {
+        "id": "top",
+        "text": "Me watching my code burn",
+        "x": 50,
+        "y": 50,
+        "width": 400,
+        "height": 100,
+        "color": "#ffffff",
+        "font_size": 24
+      },
+      {
+        "id": "bottom",
+        "text": "This is fine",
+        "x": 50,
+        "y": 350,
+        "width": 400,
+        "height": 100,
+        "color": "#ffffff",
+        "font_size": 24
+      }
+    ]
+  },
+  {
+    "id": "change-my-mind",
+    "name": "Change My Mind",
+    "description": "Guy at table with sign saying 'Change my mind'",
+    "template_url": "https://i.imgflip.com/24y43o.jpg",
+    "text_boxes": [
+      {
+        "id": "sign",
+        "text": "JavaScript is the best language. Change my mind.",
+        "x": 100,
+        "y": 200,
+        "width": 300,
+        "height": 150,
+        "color": "#000000",
+        "font_size": 20
+      }
+    ]
+  }
+]

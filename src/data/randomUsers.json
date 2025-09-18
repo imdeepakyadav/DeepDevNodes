@@ -1,0 +1,267 @@
+[
+  {
+    "id": 1,
+    "name": {
+      "first": "John",
+      "last": "Doe",
+      "title": "Mr"
+    },
+    "email": "john.doe@example.com",
+    "phone": "+1-555-123-4567",
+    "cell": "+1-555-987-6543",
+    "picture": {
+      "large": "https://randomuser.me/api/portraits/men/1.jpg",
+      "medium": "https://randomuser.me/api/portraits/med/men/1.jpg",
+      "thumbnail": "https://randomuser.me/api/portraits/thumb/men/1.jpg"
+    },
+    "location": {
+      "street": {
+        "number": 123,
+        "name": "Main Street"
+      },
+      "city": "New York",
+      "state": "New York",
+      "country": "United States",
+      "postcode": "10001",
+      "coordinates": {
+        "latitude": "40.7128",
+        "longitude": "-74.0060"
+      },
+      "timezone": {
+        "offset": "-5:00",
+        "description": "Eastern Time"
+      }
+    },
+    "login": {
+      "uuid": "550e8400-e29b-41d4-a716-446655440000",
+      "username": "johndoe123",
+      "password": "password123",
+      "salt": "salt123",
+      "md5": "md5hash123",
+      "sha1": "sha1hash123",
+      "sha256": "sha256hash123"
+    },
+    "dob": {
+      "date": "1985-05-15T10:30:00.000Z",
+      "age": 38
+    },
+    "registered": {
+      "date": "2010-03-20T15:45:00.000Z",
+      "age": 13
+    },
+    "gender": "male",
+    "nat": "US"
+  },
+  {
+    "id": 2,
+    "name": {
+      "first": "Jane",
+      "last": "Smith",
+      "title": "Ms"
+    },
+    "email": "jane.smith@example.com",
+    "phone": "+1-555-234-5678",
+    "cell": "+1-555-876-5432",
+    "picture": {
+      "large": "https://randomuser.me/api/portraits/women/2.jpg",
+      "medium": "https://randomuser.me/api/portraits/med/women/2.jpg",
+      "thumbnail": "https://randomuser.me/api/portraits/thumb/women/2.jpg"
+    },
+    "location": {
+      "street": {
+        "number": 456,
+        "name": "Oak Avenue"
+      },
+      "city": "Los Angeles",
+      "state": "California",
+      "country": "United States",
+      "postcode": "90210",
+      "coordinates": {
+        "latitude": "34.0522",
+        "longitude": "-118.2437"
+      },
+      "timezone": {
+        "offset": "-8:00",
+        "description": "Pacific Time"
+      }
+    },
+    "login": {
+      "uuid": "550e8400-e29b-41d4-a716-446655440001",
+      "username": "janesmith456",
+      "password": "password456",
+      "salt": "salt456",
+      "md5": "md5hash456",
+      "sha1": "sha1hash456",
+      "sha256": "sha256hash456"
+    },
+    "dob": {
+      "date": "1990-08-22T14:20:00.000Z",
+      "age": 33
+    },
+    "registered": {
+      "date": "2012-07-10T09:15:00.000Z",
+      "age": 11
+    },
+    "gender": "female",
+    "nat": "US"
+  },
+  {
+    "id": 3,
+    "name": {
+      "first": "Alex",
+      "last": "Johnson",
+      "title": "Dr"
+    },
+    "email": "alex.johnson@example.com",
+    "phone": "+44-20-7946-0958",
+    "cell": "+44-7700-900123",
+    "picture": {
+      "large": "https://randomuser.me/api/portraits/men/3.jpg",
+      "medium": "https://randomuser.me/api/portraits/med/men/3.jpg",
+      "thumbnail": "https://randomuser.me/api/portraits/thumb/men/3.jpg"
+    },
+    "location": {
+      "street": {
+        "number": 789,
+        "name": "Baker Street"
+      },
+      "city": "London",
+      "state": "England",
+      "country": "United Kingdom",
+      "postcode": "NW1 6XE",
+      "coordinates": {
+        "latitude": "51.5074",
+        "longitude": "-0.1278"
+      },
+      "timezone": {
+        "offset": "+0:00",
+        "description": "Greenwich Mean Time"
+      }
+    },
+    "login": {
+      "uuid": "550e8400-e29b-41d4-a716-446655440002",
+      "username": "alexjohnson789",
+      "password": "password789",
+      "salt": "salt789",
+      "md5": "md5hash789",
+      "sha1": "sha1hash789",
+      "sha256": "sha256hash789"
+    },
+    "dob": {
+      "date": "1982-12-03T11:45:00.000Z",
+      "age": 41
+    },
+    "registered": {
+      "date": "2008-11-15T16:30:00.000Z",
+      "age": 15
+    },
+    "gender": "male",
+    "nat": "GB"
+  },
+  {
+    "id": 4,
+    "name": {
+      "first": "Maria",
+      "last": "Garcia",
+      "title": "Mrs"
+    },
+    "email": "maria.garcia@example.com",
+    "phone": "+34-91-123-4567",
+    "cell": "+34-612-345-678",
+    "picture": {
+      "large": "https://randomuser.me/api/portraits/women/4.jpg",
+      "medium": "https://randomuser.me/api/portraits/med/women/4.jpg",
+      "thumbnail": "https://randomuser.me/api/portraits/thumb/women/4.jpg"
+    },
+    "location": {
+      "street": {
+        "number": 321,
+        "name": "Gran Via"
+      },
+      "city": "Madrid",
+      "state": "Madrid",
+      "country": "Spain",
+      "postcode": "28013",
+      "coordinates": {
+        "latitude": "40.4168",
+        "longitude": "-3.7038"
+      },
+      "timezone": {
+        "offset": "+1:00",
+        "description": "Central European Time"
+      }
+    },
+    "login": {
+      "uuid": "550e8400-e29b-41d4-a716-446655440003",
+      "username": "mariagarcia321",
+      "password": "password321",
+      "salt": "salt321",
+      "md5": "md5hash321",
+      "sha1": "sha1hash321",
+      "sha256": "sha256hash321"
+    },
+    "dob": {
+      "date": "1988-04-17T08:15:00.000Z",
+      "age": 35
+    },
+    "registered": {
+      "date": "2015-02-28T12:00:00.000Z",
+      "age": 8
+    },
+    "gender": "female",
+    "nat": "ES"
+  },
+  {
+    "id": 5,
+    "name": {
+      "first": "David",
+      "last": "Chen",
+      "title": "Mr"
+    },
+    "email": "david.chen@example.com",
+    "phone": "+86-10-1234-5678",
+    "cell": "+86-138-0013-8000",
+    "picture": {
+      "large": "https://randomuser.me/api/portraits/men/5.jpg",
+      "medium": "https://randomuser.me/api/portraits/med/men/5.jpg",
+      "thumbnail": "https://randomuser.me/api/portraits/thumb/men/5.jpg"
+    },
+    "location": {
+      "street": {
+        "number": 555,
+        "name": "Wangfujing Street"
+      },
+      "city": "Beijing",
+      "state": "Beijing",
+      "country": "China",
+      "postcode": "100006",
+      "coordinates": {
+        "latitude": "39.9042",
+        "longitude": "116.4074"
+      },
+      "timezone": {
+        "offset": "+8:00",
+        "description": "China Standard Time"
+      }
+    },
+    "login": {
+      "uuid": "550e8400-e29b-41d4-a716-446655440004",
+      "username": "davidchen555",
+      "password": "password555",
+      "salt": "salt555",
+      "md5": "md5hash555",
+      "sha1": "sha1hash555",
+      "sha256": "sha256hash555"
+    },
+    "dob": {
+      "date": "1992-06-30T13:30:00.000Z",
+      "age": 31
+    },
+    "registered": {
+      "date": "2018-09-12T10:20:00.000Z",
+      "age": 5
+    },
+    "gender": "male",
+    "nat": "CN"
+  }
+]

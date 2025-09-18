@@ -1,0 +1,36 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: "deepdevnodes API"
+abstract: "A comprehensive REST API providing access to various data sources including financial data, space information, GitHub statistics, and more. Built with Node.js and Express.js for high performance and scalability."
+authors:
+  - family-names: "Yadav"
+    given-names: "Deepak"
+    orcid: "https://orcid.org/0000-0000-0000-0000"
+repository-code: "https://github.com/imdeepakyadav/deepdevnodes"
+url: "https://github.com/imdeepakyadav/deepdevnodes"
+license: MIT
+preferred-citation:
+  type: software
+  title: "deepdevnodes API: A Comprehensive Data Aggregation Service"
+  authors:
+    - family-names: "Yadav"
+      given-names: "Deepak"
+      orcid: "https://orcid.org/0000-0000-0000"
+  repository-code: "https://github.com/imdeepakyadav/deepdevnodes"
+  url: "https://github.com/imdeepakyadav/deepdevnodes"
+  license: MIT
+  year: 2024
+keywords:
+  - API
+  - REST
+  - Node.js
+  - Express.js
+  - Data Aggregation
+  - Financial Data
+  - Space Data
+  - GitHub API
+  - Open Source
+  - JavaScript
+  - Backend
+  - Web Development

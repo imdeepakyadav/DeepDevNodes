@@ -1,0 +1,112 @@
+[
+  {
+    "rank": 1,
+    "repositoryName": "freeCodeCamp/freeCodeCamp",
+    "description": "freeCodeCamp.org's open-source codebase and curriculum. Learn math, programming, and computer science for free.",
+    "language": "TypeScript",
+    "stars": 427798,
+    "forks": 41569,
+    "starsToday": 132,
+    "owner": {
+      "login": "freeCodeCamp",
+      "avatar_url": "https://avatars.githubusercontent.com/u/9892522?v=4",
+      "type": "Organization"
+    },
+    "url": "https://github.com/freeCodeCamp/freeCodeCamp",
+    "builtBy": [
+      {
+        "username": "freeCodeCamp",
+        "href": "https://github.com/freeCodeCamp",
+        "avatar": "https://avatars.githubusercontent.com/u/9892522?v=4"
+      }
+    ]
+  },
+  {
+    "rank": 2,
+    "repositoryName": "codecrafters-io/build-your-own-x",
+    "description": "Master programming by recreating your favorite technologies from scratch.",
+    "language": "Markdown",
+    "stars": 420294,
+    "forks": 39377,
+    "starsToday": 414,
+    "owner": {
+      "login": "codecrafters-io",
+      "avatar_url": "https://avatars.githubusercontent.com/u/58904235?v=4",
+      "type": "Organization"
+    },
+    "url": "https://github.com/codecrafters-io/build-your-own-x",
+    "builtBy": [
+      {
+        "username": "codecrafters-io",
+        "href": "https://github.com/codecrafters-io",
+        "avatar": "https://avatars.githubusercontent.com/u/58904235?v=4"
+      }
+    ]
+  },
+  {
+    "rank": 3,
+    "repositoryName": "sindresorhus/awesome",
+    "description": "😎 Awesome lists about all kinds of interesting topics",
+    "language": null,
+    "stars": 400548,
+    "forks": 31598,
+    "starsToday": 503,
+    "owner": {
+      "login": "sindresorhus",
+      "avatar_url": "https://avatars.githubusercontent.com/u/170270?v=4",
+      "type": "User"
+    },
+    "url": "https://github.com/sindresorhus/awesome",
+    "builtBy": [
+      {
+        "username": "sindresorhus",
+        "href": "https://github.com/sindresorhus",
+        "avatar": "https://avatars.githubusercontent.com/u/170270?v=4"
+      }
+    ]
+  },
+  {
+    "rank": 4,
+    "repositoryName": "EbookFoundation/free-programming-books",
+    "description": ":books: Freely available programming books",
+    "language": "Python",
+    "stars": 368347,
+    "forks": 64167,
+    "starsToday": 327,
+    "owner": {
+      "login": "EbookFoundation",
+      "avatar_url": "https://avatars.githubusercontent.com/u/14127308?v=4",
+      "type": "Organization"
+    },
+    "url": "https://github.com/EbookFoundation/free-programming-books",
+    "builtBy": [
+      {
+        "username": "EbookFoundation",
+        "href": "https://github.com/EbookFoundation",
+        "avatar": "https://avatars.githubusercontent.com/u/14127308?v=4"
+      }
+    ]
+  },
+  {
+    "rank": 5,
+    "repositoryName": "public-apis/public-apis",
+    "description": "A collective list of free APIs",
+    "language": "Python",
+    "stars": 365275,
+    "forks": 38350,
+    "starsToday": 317,
+    "owner": {
+      "login": "public-apis",
+      "avatar_url": "https://avatars.githubusercontent.com/u/51121562?v=4",
+      "type": "Organization"
+    },
+    "url": "https://github.com/public-apis/public-apis",
+    "builtBy": [
+      {
+        "username": "public-apis",
+        "href": "https://github.com/public-apis",
+        "avatar": "https://avatars.githubusercontent.com/u/51121562?v=4"
+      }
+    ]
+  }
+]

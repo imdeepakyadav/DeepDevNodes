@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "fact": "Honey never spoils. Archaeologists have found pots of honey in ancient Egyptian tombs that are over 3,000 years old and still perfectly edible.",
+    "category": "food",
+    "source": "Scientific American"
+  },
+  {
+    "id": 2,
+    "fact": "A group of flamingos is called a 'flamboyance'.",
+    "category": "animals",
+    "source": "National Geographic"
+  },
+  {
+    "id": 3,
+    "fact": "Octopuses have three hearts and blue blood.",
+    "category": "animals",
+    "source": "Smithsonian Magazine"
+  },
+  {
+    "id": 4,
+    "fact": "The shortest war in history lasted only 38-45 minutes, between Britain and Zanzibar in 1896.",
+    "category": "history",
+    "source": "BBC History"
+  },
+  {
+    "id": 5,
+    "fact": "A single cloud can weigh more than a million pounds.",
+    "category": "science",
+    "source": "NASA"
+  },
+  {
+    "id": 6,
+    "fact": "Bananas are berries, but strawberries aren't.",
+    "category": "food",
+    "source": "Botanical Society of America"
+  },
+  {
+    "id": 7,
+    "fact": "The human brain uses about 20% of the body's total energy.",
+    "category": "science",
+    "source": "Harvard Medical School"
+  },
+  {
+    "id": 8,
+    "fact": "A day on Venus is longer than its year.",
+    "category": "space",
+    "source": "NASA"
+  },
+  {
+    "id": 9,
+    "fact": "The Great Wall of China is not visible from space with the naked eye.",
+    "category": "myths",
+    "source": "NASA"
+  },
+  {
+    "id": 10,
+    "fact": "Sharks have been around longer than trees.",
+    "category": "animals",
+    "source": "Natural History Museum"
+  },
+  {
+    "id": 11,
+    "fact": "The first computer programmer was Ada Lovelace in the 1840s.",
+    "category": "technology",
+    "source": "Computer History Museum"
+  },
+  {
+    "id": 12,
+    "fact": "A group of pandas is called an 'embarrassment'.",
+    "category": "animals",
+    "source": "World Wildlife Fund"
+  },
+  {
+    "id": 13,
+    "fact": "The human eye can distinguish about 10 million colors.",
+    "category": "science",
+    "source": "American Academy of Ophthalmology"
+  },
+  {
+    "id": 14,
+    "fact": "Cleopatra lived closer in time to the Moon landing than to the construction of the Great Pyramid of Giza.",
+    "category": "history",
+    "source": "History Channel"
+  },
+  {
+    "id": 15,
+    "fact": "A bolt of lightning is five times hotter than the surface of the Sun.",
+    "category": "science",
+    "source": "National Weather Service"
+  }
+]

@@ -1,0 +1,110 @@
+# EditorConfig is awesome: https://EditorConfig.org
+
+# top-most EditorConfig file
+root = true
+
+# All files
+[*]
+charset = utf-8
+end_of_line = lf
+indent_style = space
+indent_size = 2
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# JavaScript files
+[*.js]
+indent_size = 2
+
+# JSON files
+[*.json]
+indent_size = 2
+
+# Markdown files
+[*.md]
+trim_trailing_whitespace = false
+max_line_length = 80
+
+# YAML files
+[*.{yml,yaml}]
+indent_size = 2
+
+# Package.json
+[package.json]
+indent_size = 2
+
+# HTML files
+[*.html]
+indent_size = 2
+
+# CSS files
+[*.css]
+indent_size = 2
+
+# Environment files
+[.env*]
+insert_final_newline = false
+
+# Git files
+[.gitignore]
+trim_trailing_whitespace = false
+
+# License files
+LICENSE
+trim_trailing_whitespace = false
+
+# Documentation
+[docs/**]
+trim_trailing_whitespace = false
+
+# Test files
+[*.test.js]
+indent_size = 2
+
+# Configuration files
+[*.config.js]
+indent_size = 2
+
+# Docker files
+[Dockerfile*]
+indent_style = tab
+indent_size = 4
+
+# Shell scripts
+[*.sh]
+end_of_line = lf
+indent_style = space
+indent_size = 2
+
+# Windows batch files
+[*.bat]
+end_of_line = crlf
+indent_style = space
+indent_size = 4
+
+# Python files (if any)
+[*.py]
+indent_size = 4
+
+# SQL files (if any)
+[*.sql]
+indent_style = space
+indent_size = 2
+
+# Log files
+[*.log]
+insert_final_newline = false
+trim_trailing_whitespace = false
+
+# Lock files
+[package-lock.json]
+indent_size = 2
+insert_final_newline = true
+
+# VS Code settings
+[.vscode/**]
+indent_size = 2
+
+# GitHub templates
+[.github/**]
+indent_size = 2

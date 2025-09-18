@@ -1,0 +1,223 @@
+[
+  {
+    "rank": 1,
+    "package": {
+      "name": "react",
+      "version": "19.1.1",
+      "description": "React is a JavaScript library for building user interfaces.",
+      "keywords": [
+        "react"
+      ],
+      "author": {
+        "name": "Unknown"
+      },
+      "license": "MIT"
+    },
+    "downloads": 9717979,
+    "downloadsChange": 6.929457304509906,
+    "stars": 20041,
+    "publisher": {
+      "username": "fb",
+      "email": "opensource+npm@fb.com"
+    },
+    "maintainers": [
+      {
+        "name": "fb",
+        "email": "opensource+npm@fb.com"
+      },
+      {
+        "name": "react-bot",
+        "email": "react-core@meta.com"
+      }
+    ]
+  },
+  {
+    "rank": 2,
+    "package": {
+      "name": "lodash",
+      "version": "4.17.21",
+      "description": "Lodash modular utilities.",
+      "keywords": [
+        "modules",
+        "stdlib",
+        "util"
+      ],
+      "author": {
+        "name": "John-David Dalton",
+        "email": "john.david.dalton@gmail.com"
+      },
+      "license": "MIT"
+    },
+    "downloads": 2353355,
+    "downloadsChange": 0.8566020084129629,
+    "stars": 51042,
+    "publisher": {
+      "username": "mathias",
+      "email": "mathias@qiwi.be"
+    },
+    "maintainers": [
+      {
+        "name": "mathias",
+        "email": "mathias@qiwi.be"
+      },
+      {
+        "name": "jdalton",
+        "email": "john.david.dalton@gmail.com"
+      },
+      {
+        "name": "bnjmnt4n",
+        "email": "benjamin@dev.ofcr.se"
+      }
+    ]
+  },
+  {
+    "rank": 3,
+    "package": {
+      "name": "axios",
+      "version": "1.12.2",
+      "description": "Promise based HTTP client for the browser and node.js",
+      "keywords": [
+        "xhr",
+        "http",
+        "ajax",
+        "promise",
+        "node"
+      ],
+      "author": {
+        "name": "Matt Zabriskie"
+      },
+      "license": "MIT"
+    },
+    "downloads": 6791982,
+    "downloadsChange": 5.401262820623868,
+    "stars": 40491,
+    "publisher": {
+      "username": "mzabriskie",
+      "email": "mzabriskie@gmail.com"
+    },
+    "maintainers": [
+      {
+        "name": "mzabriskie",
+        "email": "mzabriskie@gmail.com"
+      },
+      {
+        "name": "nickuraltsev",
+        "email": "nick.uraltsev@gmail.com"
+      },
+      {
+        "name": "emilyemorehouse",
+        "email": "emilyemorehouse@gmail.com"
+      },
+      {
+        "name": "jasonsaayman",
+        "email": "jasonsaayman@gmail.com"
+      }
+    ]
+  },
+  {
+    "rank": 4,
+    "package": {
+      "name": "express",
+      "version": "5.1.0",
+      "description": "Fast, unopinionated, minimalist web framework",
+      "keywords": [
+        "express",
+        "framework",
+        "sinatra",
+        "web",
+        "http",
+        "rest",
+        "restful",
+        "router",
+        "app",
+        "api"
+      ],
+      "author": {
+        "name": "TJ Holowaychuk",
+        "email": "tj@vision-media.ca"
+      },
+      "license": "MIT"
+    },
+    "downloads": 7043128,
+    "downloadsChange": 3.200413845488523,
+    "stars": 76614,
+    "publisher": {
+      "username": "wesleytodd",
+      "email": "wes@wesleytodd.com"
+    },
+    "maintainers": [
+      {
+        "name": "wesleytodd",
+        "email": "wes@wesleytodd.com"
+      },
+      {
+        "name": "jonchurch",
+        "email": "npm@jonchurch.com"
+      },
+      {
+        "name": "ctcpip",
+        "email": "c@labsector.com"
+      },
+      {
+        "name": "sheplu",
+        "email": "jean.burellier@gmail.com"
+      }
+    ]
+  },
+  {
+    "rank": 5,
+    "package": {
+      "name": "typescript",
+      "version": "5.9.2",
+      "description": "TypeScript is a language for application scale JavaScript development",
+      "keywords": [
+        "TypeScript",
+        "Microsoft",
+        "compiler",
+        "language",
+        "javascript"
+      ],
+      "author": {
+        "name": "Microsoft Corp."
+      },
+      "license": "Apache-2.0"
+    },
+    "downloads": 10643962,
+    "downloadsChange": 0.022654338178144773,
+    "stars": 24817,
+    "publisher": {
+      "username": "typescript-bot",
+      "email": "typescript@microsoft.com"
+    },
+    "maintainers": [
+      {
+        "name": "typescript-bot",
+        "email": "typescript@microsoft.com"
+      },
+      {
+        "name": "weswigham",
+        "email": "wwigham@gmail.com"
+      },
+      {
+        "name": "sanders_n",
+        "email": "nathan@shively-sanders.com"
+      },
+      {
+        "name": "andrewbranch",
+        "email": "andrew@wheream.io"
+      },
+      {
+        "name": "sheetalkamat",
+        "email": "shkamat@microsoft.com"
+      },
+      {
+        "name": "typescript-deploys",
+        "email": "typescript-design@microsoft.com"
+      },
+      {
+        "name": "jakebailey",
+        "email": "jacob.b.bailey@gmail.com"
+      }
+    ]
+  }
+]

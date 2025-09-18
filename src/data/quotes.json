@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "quote": "The only way to do great work is to love what you do.",
+    "author": "Steve Jobs",
+    "category": "inspiration"
+  },
+  {
+    "id": 2,
+    "quote": "Innovation distinguishes between a leader and a follower.",
+    "author": "Steve Jobs",
+    "category": "leadership"
+  },
+  {
+    "id": 3,
+    "quote": "The best error message is the one that never shows up.",
+    "author": "Thomas Fuchs",
+    "category": "programming"
+  },
+  {
+    "id": 4,
+    "quote": "Code is poetry written in logic.",
+    "author": "Unknown",
+    "category": "programming"
+  },
+  {
+    "id": 5,
+    "quote": "First, solve the problem. Then, write the code.",
+    "author": "John Johnson",
+    "category": "programming"
+  },
+  {
+    "id": 6,
+    "quote": "The future belongs to those who believe in the beauty of their dreams.",
+    "author": "Eleanor Roosevelt",
+    "category": "inspiration"
+  },
+  {
+    "id": 7,
+    "quote": "Leadership is not about being in charge. It's about taking care of those in your charge.",
+    "author": "Simon Sinek",
+    "category": "leadership"
+  }
+]

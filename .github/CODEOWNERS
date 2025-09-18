@@ -1,0 +1,98 @@
+# Code Owners
+# This file defines the code owners for different parts of the deepdevnodes API repository
+# When a pull request is opened that modifies files in these paths, the listed owners will be automatically requested for review
+# See https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Global owners - receive notifications for all changes
+* @imdeepakyadav
+
+# API routes and endpoints
+/src/routes/ @imdeepakyadav
+/server.js @imdeepakyadav
+/app.js @imdeepakyadav
+
+# Data management and utilities
+/src/data/ @imdeepakyadav
+/src/utils/ @imdeepakyadav
+/src/services/ @imdeepakyadav
+
+# Documentation
+README.md @imdeepakyadav
+/docs/ @imdeepakyadav
+*.md @imdeepakyadav
+
+# Configuration files
+package.json @imdeepakyadav
+package-lock.json @imdeepakyadav
+.env.example @imdeepakyadav
+config/ @imdeepakyadav
+
+# GitHub configuration
+.github/ @imdeepakyadav
+.github/workflows/ @imdeepakyadav
+.github/ISSUE_TEMPLATE/ @imdeepakyadav
+
+# Testing
+/test/ @imdeepakyadav
+/tests/ @imdeepakyadav
+*.test.js @imdeepakyadav
+*.spec.js @imdeepakyadav
+
+# Build and deployment
+Dockerfile @imdeepakyadav
+docker-compose.yml @imdeepakyadav
+.dockerignore @imdeepakyadav
+
+# Security and legal
+SECURITY.md @imdeepakyadav
+LICENSE @imdeepakyadav
+CODE_OF_CONDUCT.md @imdeepakyadav
+
+# CI/CD and automation
+.github/workflows/ @imdeepakyadav
+scripts/ @imdeepakyadav
+
+# Data files (with caution - these contain API data)
+/data/ @imdeepakyadav
+
+# Dependencies and lock files
+node_modules/ @imdeepakyadav
+package-lock.json @imdeepakyadav
+yarn.lock @imdeepakyadav
+
+# Logs and temporary files
+logs/ @imdeepakyadav
+*.log @imdeepakyadav
+tmp/ @imdeepakyadav
+temp/ @imdeepakyadav
+
+# Environment and secrets
+.env @imdeepakyadav
+.env.local @imdeepakyadav
+.env.production @imdeepakyadav
+.env.staging @imdeepakyadav
+
+# IDE and editor files
+.vscode/ @imdeepakyadav
+.idea/ @imdeepakyadav
+*.swp @imdeepakyadav
+*.swo @imdeepakyadav
+
+# OS generated files
+.DS_Store @imdeepakyadav
+Thumbs.db @imdeepakyadav
+
+# Coverage reports
+coverage/ @imdeepakyadav
+.nyc_output/ @imdeepakyadav
+
+# Build outputs
+dist/ @imdeepakyadav
+build/ @imdeepakyadav
+.next/ @imdeepakyadav
+.nuxt/ @imdeepakyadav
+
+# Backup files
+*.bak @imdeepakyadav
+*.backup @imdeepakyadav
+*~ @imdeepakyadav

@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "joke": "Why do programmers prefer dark mode? Because light attracts bugs!",
+    "category": "programming"
+  },
+  {
+    "id": 2,
+    "joke": "Why did the developer go broke? Because he used up all his cache!",
+    "category": "programming"
+  },
+  {
+    "id": 3,
+    "joke": "What do you call a fake noodle? An impasta!",
+    "category": "general"
+  },
+  {
+    "id": 4,
+    "joke": "Why don't scientists trust atoms? Because they make up everything!",
+    "category": "science"
+  },
+  {
+    "id": 5,
+    "joke": "Why did the scarecrow win an award? Because he was outstanding in his field!",
+    "category": "general"
+  },
+  {
+    "id": 6,
+    "joke": "Why did the JavaScript developer wear glasses? Because he couldn't C#",
+    "category": "programming"
+  },
+  {
+    "id": 7,
+    "joke": "What do you call a group of musical whales? An orca-stra!",
+    "category": "general"
+  }
+]

@@ -1,0 +1,135 @@
+[
+  {
+    "question_id": 5767325,
+    "title": "How can I remove a specific item from an array in JavaScript?",
+    "body": "<p>How do I remove a specific value from an array? Something like:</p>\n<pre class=\"lang-js prettyprint-override\"><code>array.remove(value);\n</code></pre>\n<p>Constraints: I have to use <strong>core</st...",
+    "tags": [
+      "javascript",
+      "arrays"
+    ],
+    "score": 12210,
+    "view_count": 13481944,
+    "answer_count": 50,
+    "creation_date": "2011-04-23T22:17:18.000Z",
+    "last_activity_date": "2025-08-31T20:21:37.000Z",
+    "owner": {
+      "user_id": 364969,
+      "display_name": "Walker",
+      "reputation": 135231,
+      "user_type": "registered",
+      "profile_image": "https://www.gravatar.com/avatar/79e7cefc9e7deb0e0bf422baa1a38a2c?s=256&d=identicon&r=PG",
+      "link": "https://stackoverflow.com/users/364969/walker"
+    },
+    "is_answered": true,
+    "accepted_answer_id": 5767357,
+    "link": "https://stackoverflow.com/questions/5767325/how-can-i-remove-a-specific-item-from-an-array-in-javascript"
+  },
+  {
+    "question_id": 178325,
+    "title": "How do I check if an element is hidden in jQuery?",
+    "body": "<p>How do I toggle the visibility of an element using  <code>.hide()</code>, <code>.show()</code>, or <code>.toggle()</code>?</p>\n<p>How do I test if an element is <code>visible</code> or <code>hidden...",
+    "tags": [
+      "javascript",
+      "jquery",
+      "dom",
+      "visibility",
+      "display"
+    ],
+    "score": 8740,
+    "view_count": 3253551,
+    "answer_count": 67,
+    "creation_date": "2008-10-07T13:03:18.000Z",
+    "last_activity_date": "2025-02-12T15:47:25.000Z",
+    "owner": {
+      "user_id": 21709,
+      "display_name": "Philip Morton",
+      "reputation": 132289,
+      "user_type": "registered",
+      "profile_image": "https://www.gravatar.com/avatar/3ea9c684a2db319df788cecc6c98f9cd?s=256&d=identicon&r=PG",
+      "link": "https://stackoverflow.com/users/21709/philip-morton"
+    },
+    "is_answered": true,
+    "accepted_answer_id": 178450,
+    "link": "https://stackoverflow.com/questions/178325/how-do-i-check-if-an-element-is-hidden-in-jquery"
+  },
+  {
+    "question_id": 22343224,
+    "title": "What&#39;s the difference between tilde(~) and caret(^) in package.json?",
+    "body": "<p>After I upgraded to the latest stable <code>node</code> and <code>npm</code>, I tried <code>npm install moment --save</code>. It saves the entry in the <code>package.json</code> with the caret <cod...",
+    "tags": [
+      "node.js",
+      "npm",
+      "package.json",
+      "caret",
+      "semantic-versioning"
+    ],
+    "score": 5575,
+    "view_count": 2076037,
+    "answer_count": 23,
+    "creation_date": "2014-03-12T06:02:21.000Z",
+    "last_activity_date": "2025-05-14T10:28:46.000Z",
+    "owner": {
+      "user_id": 1154350,
+      "display_name": "Fizer Khan",
+      "reputation": 93497,
+      "user_type": "registered",
+      "profile_image": "https://i.sstatic.net/baIRy.jpg?s=256",
+      "link": "https://stackoverflow.com/users/1154350/fizer-khan"
+    },
+    "is_answered": true,
+    "accepted_answer_id": 22345808,
+    "link": "https://stackoverflow.com/questions/22343224/whats-the-difference-between-tilde-and-caret-in-package-json"
+  },
+  {
+    "question_id": 69692842,
+    "title": "Error message &quot;error:0308010C:digital envelope routines::unsupported&quot;",
+    "body": "<p>I created the default IntelliJ IDEA React project and got this:</p>\n<pre class=\"lang-none prettyprint-override\"><code>Error: error:0308010C:digital envelope routines::unsupported\n    at new Hash (n...",
+    "tags": [
+      "node.js",
+      "reactjs",
+      "webpack"
+    ],
+    "score": 2562,
+    "view_count": 3477032,
+    "answer_count": 72,
+    "creation_date": "2021-10-23T23:39:57.000Z",
+    "last_activity_date": "2025-07-21T03:07:17.000Z",
+    "owner": {
+      "user_id": 14994086,
+      "display_name": "a1cd",
+      "reputation": 25716,
+      "user_type": "registered",
+      "profile_image": "https://www.gravatar.com/avatar/b60275209c13e1f19f372aadb309758c?s=256&d=identicon&r=PG",
+      "link": "https://stackoverflow.com/users/14994086/a1cd"
+    },
+    "is_answered": true,
+    "accepted_answer_id": 69699772,
+    "link": "https://stackoverflow.com/questions/69692842/error-message-error0308010cdigital-envelope-routinesunsupported"
+  },
+  {
+    "question_id": 31079081,
+    "title": "How can I programmatically navigate using React Router?",
+    "body": "<p>With <a href=\"https://reactrouter.com/\" rel=\"nofollow noreferrer\">React Router</a>, I can use the <code>Link</code> element to create links which are natively handled by React Router.</p>\n<p>I see ...",
+    "tags": [
+      "javascript",
+      "reactjs",
+      "react-router"
+    ],
+    "score": 2372,
+    "view_count": 1804052,
+    "answer_count": 51,
+    "creation_date": "2015-06-26T17:38:51.000Z",
+    "last_activity_date": "2025-07-22T19:51:10.000Z",
+    "owner": {
+      "user_id": 5056,
+      "display_name": "George Mauer",
+      "reputation": 122800,
+      "user_type": "registered",
+      "profile_image": "https://www.gravatar.com/avatar/315b95cdcac83705c10ea14e239aeaf5?s=256&d=identicon&r=PG",
+      "link": "https://stackoverflow.com/users/5056/george-mauer"
+    },
+    "is_answered": true,
+    "accepted_answer_id": 42121109,
+    "link": "https://stackoverflow.com/questions/31079081/how-can-i-programmatically-navigate-using-react-router"
+  }
+]
