@@ -1,6 +1,7 @@
 import cors from 'cors';
 import dotenv from 'dotenv';
 import express from 'express';
+import path from 'path';
 
 // Load environment variables
 dotenv.config();
@@ -39,6 +40,11 @@ app.use(rateLimiter);
 
 // Swagger documentation
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+// Serve landing page at root
+app.get('/', (req, res) => {
+  res.sendFile(path.join(process.cwd(), 'public', 'index.html'));
+});
 
 // API Routes
 app.use('/api/countries', countryRoutes);
