@@ -8,7 +8,7 @@ async function testMigration() {
     console.log('Testing crypto migration...');
     await connectDB();
 
-    const cryptoPath = path.join('data', 'crypto.json');
+    const cryptoPath = path.join('src', 'data', 'crypto.json');
     if (!fs.existsSync(cryptoPath)) {
       console.log('crypto.json not found');
       return;
@@ -17,12 +17,26 @@ async function testMigration() {
     const cryptoData = JSON.parse(fs.readFileSync(cryptoPath, 'utf8'));
     console.log(`Found ${cryptoData.length} crypto records`);
 
+    // Remove duplicates based on symbol
+    const uniqueCryptoData = cryptoData.filter(
+      (crypto, index, self) =>
+        index === self.findIndex((c) => c.symbol === crypto.symbol)
+    );
+    console.log(
+      `After removing duplicates: ${uniqueCryptoData.length} records`
+    );
+
     // Clear existing data
-    await Crypto.deleteMany({});
-    console.log('Cleared existing crypto data');
+    console.log('Clearing existing crypto data...');
+    const deleteResult = await Crypto.deleteMany({});
+    console.log(`Deleted ${deleteResult.deletedCount} existing records`);
+
+    // Verify deletion
+    const countAfterDelete = await Crypto.countDocuments();
+    console.log(`Records after deletion: ${countAfterDelete}`);
 
     // Insert new data
-    const cryptoDocs = cryptoData.map((crypto) => ({
+    const cryptoDocs = uniqueCryptoData.map((crypto) => ({
       ...crypto,
       last_updated: new Date(crypto.last_updated || Date.now()),
     }));

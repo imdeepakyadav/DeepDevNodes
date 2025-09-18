@@ -53,7 +53,7 @@ const npmSchema = new mongoose.Schema(
       default: 0,
     },
     publisher: {
-      username: {
+      name: {
         type: String,
         default: 'unknown',
       },
@@ -64,7 +64,7 @@ const npmSchema = new mongoose.Schema(
     },
     maintainers: [
       {
-        username: {
+        name: {
           type: String,
           required: true,
         },
