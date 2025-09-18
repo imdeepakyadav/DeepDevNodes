@@ -1,5 +1,5 @@
-import express from "express";
-import { convertCurrency } from "../controllers/currencyController.js";
+import express from 'express';
+import { convertCurrency } from '../controllers/currencyController.js';
 
 const router = express.Router();
 
@@ -70,7 +70,7 @@ const router = express.Router();
  *                       example: "2023-12-01T10:00:00.000Z"
  *                     note:
  *                       type: string
- *                       example: "Exchange rates are for demonstration purposes only"
+                        example: 'Exchange rates are for demonstration'
  *       400:
  *         description: Invalid parameters or unsupported currencies
  *         content:
@@ -84,6 +84,6 @@ const router = express.Router();
  *             schema:
  *               $ref: '#/components/schemas/Error'
  */
-router.get("/convert", convertCurrency);
+router.get('/convert', convertCurrency);
 
 export default router;

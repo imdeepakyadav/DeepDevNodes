@@ -1,8 +1,8 @@
-import express from "express";
+import express from 'express';
 import {
   getAllCountries,
   getCountryByCode,
-} from "../controllers/countriesController.js";
+} from '../controllers/countriesController.js';
 
 const router = express.Router();
 
@@ -11,7 +11,7 @@ const router = express.Router();
  * /api/countries:
  *   get:
  *     summary: Get all countries with filtering, sorting, and pagination
- *     description: Retrieve a list of countries with optional filtering, sorting, and pagination
+ *     description: Retrieve countries with filtering, sorting, pagination
  *     tags: [Countries]
  *     parameters:
  *       - in: query
@@ -102,7 +102,7 @@ const router = express.Router();
  *             schema:
  *               $ref: '#/components/schemas/Error'
  */
-router.get("/", getAllCountries);
+router.get('/', getAllCountries);
 
 /**
  * @swagger
@@ -145,6 +145,6 @@ router.get("/", getAllCountries);
  *             schema:
  *               $ref: '#/components/schemas/Error'
  */
-router.get("/:code", getCountryByCode);
+router.get('/:code', getCountryByCode);
 
 export default router;

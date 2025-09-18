@@ -1,17 +1,17 @@
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
-import { createErrorResponse, createResponse } from "../utils/apiHelpers.js";
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { createErrorResponse, createResponse } from '../utils/apiHelpers.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Load data files
-const githubTrendingPath = path.join(__dirname, "../data/githubTrending.json");
-const npmTrendingPath = path.join(__dirname, "../data/npmTrending.json");
+const githubTrendingPath = path.join(__dirname, '../data/githubTrending.json');
+const npmTrendingPath = path.join(__dirname, '../data/npmTrending.json');
 const stackoverflowTrendingPath = path.join(
   __dirname,
-  "../data/stackoverflowTrending.json"
+  '../data/stackoverflowTrending.json'
 );
 
 let githubTrendingData = [];
@@ -20,13 +20,13 @@ let stackoverflowTrendingData = [];
 
 // Load data on startup
 try {
-  githubTrendingData = JSON.parse(fs.readFileSync(githubTrendingPath, "utf8"));
-  npmTrendingData = JSON.parse(fs.readFileSync(npmTrendingPath, "utf8"));
+  githubTrendingData = JSON.parse(fs.readFileSync(githubTrendingPath, 'utf8'));
+  npmTrendingData = JSON.parse(fs.readFileSync(npmTrendingPath, 'utf8'));
   stackoverflowTrendingData = JSON.parse(
-    fs.readFileSync(stackoverflowTrendingPath, "utf8")
+    fs.readFileSync(stackoverflowTrendingPath, 'utf8')
   );
 } catch (error) {
-  console.error("Error loading developer data:", error.message);
+  console.error('Error loading developer data:', error.message);
 }
 
 /**
@@ -36,7 +36,7 @@ try {
  */
 export const getGithubTrending = (req, res) => {
   try {
-    const { language, limit = 10, sort = "stars" } = req.query;
+    const { language, limit = 10, sort = 'stars' } = req.query;
 
     let filteredData = [...githubTrendingData];
 
@@ -50,11 +50,11 @@ export const getGithubTrending = (req, res) => {
     // Sort data
     filteredData.sort((a, b) => {
       switch (sort) {
-        case "stars":
+        case 'stars':
           return b.stars - a.stars;
-        case "forks":
+        case 'forks':
           return b.forks - a.forks;
-        case "starsToday":
+        case 'starsToday':
           return b.starsToday - a.starsToday;
         default:
           return b.stars - a.stars;
@@ -73,7 +73,7 @@ export const getGithubTrending = (req, res) => {
   } catch (error) {
     res
       .status(500)
-      .json(createErrorResponse("Failed to fetch GitHub trending data"));
+      .json(createErrorResponse('Failed to fetch GitHub trending data'));
   }
 };
 
@@ -84,18 +84,18 @@ export const getGithubTrending = (req, res) => {
  */
 export const getNpmTrending = (req, res) => {
   try {
-    const { limit = 10, sort = "downloads" } = req.query;
+    const { limit = 10, sort = 'downloads' } = req.query;
 
-    let filteredData = [...npmTrendingData];
+    const filteredData = [...npmTrendingData];
 
     // Sort data
     filteredData.sort((a, b) => {
       switch (sort) {
-        case "downloads":
+        case 'downloads':
           return b.downloads - a.downloads;
-        case "stars":
+        case 'stars':
           return b.stars - a.stars;
-        case "downloadsChange":
+        case 'downloadsChange':
           return b.downloadsChange - a.downloadsChange;
         default:
           return b.downloads - a.downloads;
@@ -114,7 +114,7 @@ export const getNpmTrending = (req, res) => {
   } catch (error) {
     res
       .status(500)
-      .json(createErrorResponse("Failed to fetch npm trending data"));
+      .json(createErrorResponse('Failed to fetch npm trending data'));
   }
 };
 
@@ -125,7 +125,7 @@ export const getNpmTrending = (req, res) => {
  */
 export const getStackoverflowTrending = (req, res) => {
   try {
-    const { tag, limit = 10, sort = "score", answered } = req.query;
+    const { tag, limit = 10, sort = 'score', answered } = req.query;
 
     let filteredData = [...stackoverflowTrendingData];
 
@@ -138,7 +138,7 @@ export const getStackoverflowTrending = (req, res) => {
 
     // Filter by answered status if specified
     if (answered !== undefined) {
-      const isAnswered = answered === "true";
+      const isAnswered = answered === 'true';
       filteredData = filteredData.filter(
         (question) => question.is_answered === isAnswered
       );
@@ -147,13 +147,13 @@ export const getStackoverflowTrending = (req, res) => {
     // Sort data
     filteredData.sort((a, b) => {
       switch (sort) {
-        case "score":
+        case 'score':
           return b.score - a.score;
-        case "views":
+        case 'views':
           return b.view_count - a.view_count;
-        case "answers":
+        case 'answers':
           return b.answer_count - a.answer_count;
-        case "newest":
+        case 'newest':
           return new Date(b.creation_date) - new Date(a.creation_date);
         default:
           return b.score - a.score;
@@ -172,7 +172,7 @@ export const getStackoverflowTrending = (req, res) => {
   } catch (error) {
     res
       .status(500)
-      .json(createErrorResponse("Failed to fetch StackOverflow trending data"));
+      .json(createErrorResponse('Failed to fetch StackOverflow trending data'));
   }
 };
 
@@ -229,6 +229,6 @@ export const getDeveloperStats = (req, res) => {
   } catch (error) {
     res
       .status(500)
-      .json(createErrorResponse("Failed to fetch developer statistics"));
+      .json(createErrorResponse('Failed to fetch developer statistics'));
   }
 };

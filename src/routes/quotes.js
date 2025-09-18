@@ -1,9 +1,9 @@
-import express from "express";
+import express from 'express';
 import {
   getAllQuotes,
   getQuotesByCategory,
   getRandomQuote,
-} from "../controllers/quotesController.js";
+} from '../controllers/quotesController.js';
 
 const router = express.Router();
 
@@ -12,7 +12,7 @@ const router = express.Router();
  * /api/quotes:
  *   get:
  *     summary: Get all quotes with filtering, sorting, and pagination
- *     description: Retrieve a list of quotes with optional filtering, sorting, and pagination
+ *     description: Retrieve a list of quotes
  *     tags: [Quotes]
  *     parameters:
  *       - in: query
@@ -25,7 +25,7 @@ const router = express.Router();
  *         name: category
  *         schema:
  *           type: string
- *         description: Filter by category (inspiration, leadership, programming)
+ *         description: Filter by category
  *         example: inspiration
  *       - in: query
  *         name: search
@@ -97,14 +97,14 @@ const router = express.Router();
  *             schema:
  *               $ref: '#/components/schemas/Error'
  */
-router.get("/", getAllQuotes);
+router.get('/', getAllQuotes);
 
 /**
  * @swagger
  * /api/quotes/random:
  *   get:
  *     summary: Get random quote
- *     description: Retrieve a random inspirational quote, optionally filtered by category
+ *     description: Retrieve a random inspirational quote
  *     tags: [Quotes]
  *     parameters:
  *       - in: query
@@ -139,14 +139,14 @@ router.get("/", getAllQuotes);
  *             schema:
  *               $ref: '#/components/schemas/Error'
  */
-router.get("/random", getRandomQuote);
+router.get('/random', getRandomQuote);
 
 /**
  * @swagger
  * /api/quotes/{category}:
  *   get:
  *     summary: Get quotes by category
- *     description: Retrieve quotes filtered by category with optional search, sorting, and pagination
+ *     description: Retrieve quotes filtered by category
  *     tags: [Quotes]
  *     parameters:
  *       - in: path
@@ -232,6 +232,6 @@ router.get("/random", getRandomQuote);
  *             schema:
  *               $ref: '#/components/schemas/Error'
  */
-router.get("/:category", getQuotesByCategory);
+router.get('/:category', getQuotesByCategory);
 
 export default router;

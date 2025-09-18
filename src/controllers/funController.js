@@ -126,8 +126,8 @@ export const generateMeme = (req, res) => {
       )}&text1=${encodeURIComponent(bottom_text)}`,
       preview: {
         template_url: memeTemplate.template_url,
-        top_text: top_text,
-        bottom_text: bottom_text,
+        top_text,
+        bottom_text,
       },
     };
 

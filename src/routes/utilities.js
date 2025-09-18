@@ -1,11 +1,11 @@
-import express from "express";
+import express from 'express';
 import {
   generateBarcode,
   generateLoremIpsum,
   generateQRCode,
   generateRandomNumber,
   generateUUID,
-} from "../controllers/utilitiesController.js";
+} from '../controllers/utilitiesController.js';
 
 const router = express.Router();
 
@@ -43,7 +43,7 @@ const router = express.Router();
  *             schema:
  *               $ref: '#/components/schemas/Error'
  */
-router.get("/uuid", generateUUID);
+router.get('/uuid', generateUUID);
 
 /**
  * @swagger
@@ -104,7 +104,7 @@ router.get("/uuid", generateUUID);
  *             schema:
  *               $ref: '#/components/schemas/Error'
  */
-router.get("/lorem", generateLoremIpsum);
+router.get('/lorem', generateLoremIpsum);
 
 /**
  * @swagger
@@ -167,7 +167,7 @@ router.get("/lorem", generateLoremIpsum);
  *             schema:
  *               $ref: '#/components/schemas/Error'
  */
-router.get("/random", generateRandomNumber);
+router.get('/random', generateRandomNumber);
 
 /**
  * @swagger
@@ -232,7 +232,7 @@ router.get("/random", generateRandomNumber);
  *                       example: "2023-12-01T10:00:00.000Z"
  *                     note:
  *                       type: string
- *                       example: "QR code URLs are generated dynamically. For production use, consider implementing server-side generation."
+ *                       example: 'QR codes generated dynamically'
  *       400:
  *         description: Invalid parameters
  *         content:
@@ -246,7 +246,7 @@ router.get("/random", generateRandomNumber);
  *             schema:
  *               $ref: '#/components/schemas/Error'
  */
-router.get("/qr", generateQRCode);
+router.get('/qr', generateQRCode);
 
 /**
  * @swagger
@@ -334,7 +334,7 @@ router.get("/qr", generateQRCode);
  *                       example: "2023-12-01T10:00:00.000Z"
  *                     note:
  *                       type: string
- *                       example: "Barcode URLs are generated dynamically. For production use, consider implementing server-side generation."
+ *                       example: 'Barcode generated dynamically'
  *       400:
  *         description: Invalid parameters
  *         content:
@@ -348,6 +348,6 @@ router.get("/qr", generateQRCode);
  *             schema:
  *               $ref: '#/components/schemas/Error'
  */
-router.get("/barcode", generateBarcode);
+router.get('/barcode', generateBarcode);
 
 export default router;

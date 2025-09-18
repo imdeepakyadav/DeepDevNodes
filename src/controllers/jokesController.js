@@ -1,6 +1,6 @@
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import {
   applyFilters,
   applyPagination,
@@ -8,14 +8,14 @@ import {
   createErrorResponse,
   createResponse,
   parseQueryParams,
-} from "../utils/apiHelpers.js";
+} from '../utils/apiHelpers.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Load jokes data
-const jokesPath = path.join(__dirname, "../data/jokes.json");
-const jokesData = JSON.parse(fs.readFileSync(jokesPath, "utf8"));
+const jokesPath = path.join(__dirname, '../data/jokes.json');
+const jokesData = JSON.parse(fs.readFileSync(jokesPath, 'utf8'));
 
 export const getAllJokes = (req, res) => {
   try {
@@ -25,7 +25,7 @@ export const getAllJokes = (req, res) => {
 
     // Apply search if provided
     if (search) {
-      filteredData = applySearch(filteredData, search, ["joke"]);
+      filteredData = applySearch(filteredData, search, ['joke']);
     }
 
     // Apply filters
@@ -38,8 +38,8 @@ export const getAllJokes = (req, res) => {
 
     res.json(createResponse(result.data, result.pagination));
   } catch (error) {
-    console.error("Error in getAllJokes:", error);
-    res.status(500).json(createErrorResponse("Failed to fetch jokes"));
+    console.error('Error in getAllJokes:', error);
+    res.status(500).json(createErrorResponse('Failed to fetch jokes'));
   }
 };
 
@@ -51,10 +51,10 @@ export const getRandomJoke = (req, res) => {
 
     // Filter by type if provided
     if (type) {
-      if (type === "dev") {
-        jokesPool = jokesData.filter((joke) => joke.category === "programming");
-      } else if (type === "general") {
-        jokesPool = jokesData.filter((joke) => joke.category === "general");
+      if (type === 'dev') {
+        jokesPool = jokesData.filter((joke) => joke.category === 'programming');
+      } else if (type === 'general') {
+        jokesPool = jokesData.filter((joke) => joke.category === 'general');
       }
 
       if (jokesPool.length === 0) {
@@ -69,21 +69,21 @@ export const getRandomJoke = (req, res) => {
 
     res.json(createResponse(randomJoke));
   } catch (error) {
-    console.error("Error in getRandomJoke:", error);
-    res.status(500).json(createErrorResponse("Failed to fetch random joke"));
+    console.error('Error in getRandomJoke:', error);
+    res.status(500).json(createErrorResponse('Failed to fetch random joke'));
   }
 };
 
 export const getDevJoke = (req, res) => {
   try {
     const devJokes = jokesData.filter(
-      (joke) => joke.category === "programming"
+      (joke) => joke.category === 'programming'
     );
 
     if (devJokes.length === 0) {
       return res
         .status(404)
-        .json(createErrorResponse("No programming jokes found", 404));
+        .json(createErrorResponse('No programming jokes found', 404));
     }
 
     const randomIndex = Math.floor(Math.random() * devJokes.length);
@@ -91,9 +91,9 @@ export const getDevJoke = (req, res) => {
 
     res.json(createResponse(randomDevJoke));
   } catch (error) {
-    console.error("Error in getDevJoke:", error);
+    console.error('Error in getDevJoke:', error);
     res
       .status(500)
-      .json(createErrorResponse("Failed to fetch programming joke"));
+      .json(createErrorResponse('Failed to fetch programming joke'));
   }
 };

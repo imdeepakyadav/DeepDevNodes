@@ -1,20 +1,20 @@
-import { readFileSync } from "fs";
-import { dirname, join } from "path";
-import { fileURLToPath } from "url";
-import { createResponse } from "../utils/apiHelpers.js";
+import { readFileSync } from 'fs';
+import { dirname, join } from 'path';
+import { fileURLToPath } from 'url';
+import { createResponse } from '../utils/apiHelpers.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 // Load data
 const spaceLaunches = JSON.parse(
-  readFileSync(join(__dirname, "../data/spaceLaunches.json"), "utf8")
+  readFileSync(join(__dirname, '../data/spaceLaunches.json'), 'utf8')
 );
 const apodData = JSON.parse(
-  readFileSync(join(__dirname, "../data/apod.json"), "utf8")
+  readFileSync(join(__dirname, '../data/apod.json'), 'utf8')
 );
 const planetsData = JSON.parse(
-  readFileSync(join(__dirname, "../data/planets.json"), "utf8")
+  readFileSync(join(__dirname, '../data/planets.json'), 'utf8')
 );
 
 /**
@@ -24,13 +24,13 @@ const planetsData = JSON.parse(
  */
 export const getSpaceLaunches = (req, res) => {
   try {
-    const { limit = 10, upcoming = "true" } = req.query;
+    const { limit = 10, upcoming = 'true' } = req.query;
     let data = [...spaceLaunches];
 
     // Filter by upcoming status
-    if (upcoming === "true") {
+    if (upcoming === 'true') {
       data = data.filter((launch) => launch.upcoming === true);
-    } else if (upcoming === "false") {
+    } else if (upcoming === 'false') {
       data = data.filter((launch) => launch.upcoming === false);
     }
 
@@ -44,12 +44,12 @@ export const getSpaceLaunches = (req, res) => {
     }
 
     res.json(
-      createResponse(true, data, null, "Space launches retrieved successfully")
+      createResponse(true, data, null, 'Space launches retrieved successfully')
     );
   } catch (error) {
     res
       .status(500)
-      .json(createResponse(false, null, "Failed to retrieve space launches"));
+      .json(createResponse(false, null, 'Failed to retrieve space launches'));
   }
 };
 
@@ -67,13 +67,13 @@ export const getAPOD = (req, res) => {
         true,
         apodData,
         null,
-        "Astronomy Picture of the Day retrieved successfully"
+        'Astronomy Picture of the Day retrieved successfully'
       )
     );
   } catch (error) {
     res
       .status(500)
-      .json(createResponse(false, null, "Failed to retrieve APOD"));
+      .json(createResponse(false, null, 'Failed to retrieve APOD'));
   }
 };
 
@@ -84,7 +84,7 @@ export const getAPOD = (req, res) => {
  */
 export const getPlanets = (req, res) => {
   try {
-    const { type, sort = "distance_from_sun" } = req.query;
+    const { type, sort = 'distance_from_sun' } = req.query;
     let data = [...planetsData];
 
     // Filter by type
@@ -95,13 +95,13 @@ export const getPlanets = (req, res) => {
     }
 
     // Apply sorting
-    if (sort === "name") {
+    if (sort === 'name') {
       data.sort((a, b) => a.name.localeCompare(b.name));
-    } else if (sort === "diameter") {
+    } else if (sort === 'diameter') {
       data.sort((a, b) => b.diameter - a.diameter);
-    } else if (sort === "mass") {
+    } else if (sort === 'mass') {
       data.sort((a, b) => b.mass - a.mass);
-    } else if (sort === "moons") {
+    } else if (sort === 'moons') {
       data.sort((a, b) => b.moons - a.moons);
     } else {
       // Default: distance from sun
@@ -109,12 +109,12 @@ export const getPlanets = (req, res) => {
     }
 
     res.json(
-      createResponse(true, data, null, "Planetary data retrieved successfully")
+      createResponse(true, data, null, 'Planetary data retrieved successfully')
     );
   } catch (error) {
     res
       .status(500)
-      .json(createResponse(false, null, "Failed to retrieve planetary data"));
+      .json(createResponse(false, null, 'Failed to retrieve planetary data'));
   }
 };
 
@@ -133,15 +133,15 @@ export const getPlanetByName = (req, res) => {
     if (!planet) {
       return res
         .status(404)
-        .json(createResponse(false, null, "Planet not found"));
+        .json(createResponse(false, null, 'Planet not found'));
     }
 
     res.json(
-      createResponse(true, planet, null, "Planet data retrieved successfully")
+      createResponse(true, planet, null, 'Planet data retrieved successfully')
     );
   } catch (error) {
     res
       .status(500)
-      .json(createResponse(false, null, "Failed to retrieve planet data"));
+      .json(createResponse(false, null, 'Failed to retrieve planet data'));
   }
 };

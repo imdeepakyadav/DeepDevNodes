@@ -1,17 +1,17 @@
-import { readFileSync } from "fs";
-import { dirname, join } from "path";
-import { fileURLToPath } from "url";
-import { createResponse } from "../utils/apiHelpers.js";
+import { readFileSync } from 'fs';
+import { dirname, join } from 'path';
+import { fileURLToPath } from 'url';
+import { createResponse } from '../utils/apiHelpers.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 // Load data
 const cryptoData = JSON.parse(
-  readFileSync(join(__dirname, "../data/crypto.json"), "utf8")
+  readFileSync(join(__dirname, '../data/crypto.json'), 'utf8')
 );
 const stocksData = JSON.parse(
-  readFileSync(join(__dirname, "../data/stocks.json"), "utf8")
+  readFileSync(join(__dirname, '../data/stocks.json'), 'utf8')
 );
 
 /**
@@ -21,15 +21,15 @@ const stocksData = JSON.parse(
  */
 export const getAllCrypto = (req, res) => {
   try {
-    const { limit = 10, sort = "rank" } = req.query;
+    const { limit = 10, sort = 'rank' } = req.query;
     let data = [...cryptoData];
 
     // Apply sorting
-    if (sort === "price") {
+    if (sort === 'price') {
       data.sort((a, b) => b.price - a.price);
-    } else if (sort === "market_cap") {
+    } else if (sort === 'market_cap') {
       data.sort((a, b) => b.market_cap - a.market_cap);
-    } else if (sort === "change_percent") {
+    } else if (sort === 'change_percent') {
       data.sort((a, b) => b.change_percent_24h - a.change_percent_24h);
     } else {
       data.sort((a, b) => a.rank - b.rank);
@@ -46,14 +46,14 @@ export const getAllCrypto = (req, res) => {
         true,
         data,
         null,
-        "Cryptocurrency data retrieved successfully"
+        'Cryptocurrency data retrieved successfully'
       )
     );
   } catch (error) {
     res
       .status(500)
       .json(
-        createResponse(false, null, "Failed to retrieve cryptocurrency data")
+        createResponse(false, null, 'Failed to retrieve cryptocurrency data')
       );
   }
 };
@@ -73,7 +73,7 @@ export const getCryptoBySymbol = (req, res) => {
     if (!crypto) {
       return res
         .status(404)
-        .json(createResponse(false, null, "Cryptocurrency not found"));
+        .json(createResponse(false, null, 'Cryptocurrency not found'));
     }
 
     res.json(
@@ -81,14 +81,14 @@ export const getCryptoBySymbol = (req, res) => {
         true,
         crypto,
         null,
-        "Cryptocurrency data retrieved successfully"
+        'Cryptocurrency data retrieved successfully'
       )
     );
   } catch (error) {
     res
       .status(500)
       .json(
-        createResponse(false, null, "Failed to retrieve cryptocurrency data")
+        createResponse(false, null, 'Failed to retrieve cryptocurrency data')
       );
   }
 };
@@ -100,7 +100,7 @@ export const getCryptoBySymbol = (req, res) => {
  */
 export const getAllStocks = (req, res) => {
   try {
-    const { limit = 10, sort = "symbol", sector } = req.query;
+    const { limit = 10, sort = 'symbol', sector } = req.query;
     let data = [...stocksData];
 
     // Apply sector filter
@@ -111,11 +111,11 @@ export const getAllStocks = (req, res) => {
     }
 
     // Apply sorting
-    if (sort === "price") {
+    if (sort === 'price') {
       data.sort((a, b) => b.price - a.price);
-    } else if (sort === "change_percent") {
+    } else if (sort === 'change_percent') {
       data.sort((a, b) => b.change_percent - a.change_percent);
-    } else if (sort === "market_cap") {
+    } else if (sort === 'market_cap') {
       data.sort((a, b) => b.market_cap - a.market_cap);
     } else {
       data.sort((a, b) => a.symbol.localeCompare(b.symbol));
@@ -128,12 +128,12 @@ export const getAllStocks = (req, res) => {
     }
 
     res.json(
-      createResponse(true, data, null, "Stock data retrieved successfully")
+      createResponse(true, data, null, 'Stock data retrieved successfully')
     );
   } catch (error) {
     res
       .status(500)
-      .json(createResponse(false, null, "Failed to retrieve stock data"));
+      .json(createResponse(false, null, 'Failed to retrieve stock data'));
   }
 };
 
@@ -152,16 +152,16 @@ export const getStockBySymbol = (req, res) => {
     if (!stock) {
       return res
         .status(404)
-        .json(createResponse(false, null, "Stock not found"));
+        .json(createResponse(false, null, 'Stock not found'));
     }
 
     res.json(
-      createResponse(true, stock, null, "Stock data retrieved successfully")
+      createResponse(true, stock, null, 'Stock data retrieved successfully')
     );
   } catch (error) {
     res
       .status(500)
-      .json(createResponse(false, null, "Failed to retrieve stock data"));
+      .json(createResponse(false, null, 'Failed to retrieve stock data'));
   }
 };
 
@@ -172,7 +172,7 @@ export const getStockBySymbol = (req, res) => {
  */
 export const convertCurrency = (req, res) => {
   try {
-    const { from = "USD", to = "EUR", amount = 1 } = req.query;
+    const { from = 'USD', to = 'EUR', amount = 1 } = req.query;
 
     // Mock exchange rates (in a real app, you'd fetch from an API)
     const exchangeRates = {
@@ -190,13 +190,13 @@ export const convertCurrency = (req, res) => {
     if (isNaN(amountNum) || amountNum <= 0) {
       return res
         .status(400)
-        .json(createResponse(false, null, "Invalid amount"));
+        .json(createResponse(false, null, 'Invalid amount'));
     }
 
     if (!exchangeRates[fromUpper] || !exchangeRates[fromUpper][toUpper]) {
       return res
         .status(400)
-        .json(createResponse(false, null, "Currency pair not supported"));
+        .json(createResponse(false, null, 'Currency pair not supported'));
     }
 
     const rate = exchangeRates[fromUpper][toUpper];
@@ -206,10 +206,10 @@ export const convertCurrency = (req, res) => {
       from: fromUpper,
       to: toUpper,
       amount: amountNum,
-      rate: rate,
+      rate,
       converted_amount: convertedAmount,
       timestamp: new Date().toISOString(),
-      note: "Exchange rates are for demonstration purposes only",
+      note: 'Exchange rates are for demonstration purposes only',
     };
 
     res.json(
@@ -217,12 +217,12 @@ export const convertCurrency = (req, res) => {
         true,
         result,
         null,
-        "Currency conversion completed successfully"
+        'Currency conversion completed successfully'
       )
     );
   } catch (error) {
     res
       .status(500)
-      .json(createResponse(false, null, "Failed to convert currency"));
+      .json(createResponse(false, null, 'Failed to convert currency'));
   }
 };

@@ -1,6 +1,6 @@
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import {
   applyFilters,
   applyPagination,
@@ -9,14 +9,14 @@ import {
   createErrorResponse,
   createResponse,
   parseQueryParams,
-} from "../utils/apiHelpers.js";
+} from '../utils/apiHelpers.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Load quotes data
-const quotesPath = path.join(__dirname, "../data/quotes.json");
-const quotesData = JSON.parse(fs.readFileSync(quotesPath, "utf8"));
+const quotesPath = path.join(__dirname, '../data/quotes.json');
+const quotesData = JSON.parse(fs.readFileSync(quotesPath, 'utf8'));
 
 export const getAllQuotes = (req, res) => {
   try {
@@ -26,7 +26,7 @@ export const getAllQuotes = (req, res) => {
 
     // Apply search if provided
     if (search) {
-      filteredData = applySearch(filteredData, search, ["quote", "author"]);
+      filteredData = applySearch(filteredData, search, ['quote', 'author']);
     }
 
     // Apply filters
@@ -44,8 +44,8 @@ export const getAllQuotes = (req, res) => {
 
     res.json(createResponse(result.data, result.pagination));
   } catch (error) {
-    console.error("Error in getAllQuotes:", error);
-    res.status(500).json(createErrorResponse("Failed to fetch quotes"));
+    console.error('Error in getAllQuotes:', error);
+    res.status(500).json(createErrorResponse('Failed to fetch quotes'));
   }
 };
 
@@ -78,8 +78,8 @@ export const getRandomQuote = (req, res) => {
 
     res.json(createResponse(randomQuote));
   } catch (error) {
-    console.error("Error in getRandomQuote:", error);
-    res.status(500).json(createErrorResponse("Failed to fetch random quote"));
+    console.error('Error in getRandomQuote:', error);
+    res.status(500).json(createErrorResponse('Failed to fetch random quote'));
   }
 };
 
@@ -102,7 +102,7 @@ export const getQuotesByCategory = (req, res) => {
 
     // Apply search within category if provided
     if (search) {
-      categoryQuotes = applySearch(categoryQuotes, search, ["quote", "author"]);
+      categoryQuotes = applySearch(categoryQuotes, search, ['quote', 'author']);
     }
 
     // Apply sorting
@@ -115,9 +115,9 @@ export const getQuotesByCategory = (req, res) => {
 
     res.json(createResponse(result.data, result.pagination));
   } catch (error) {
-    console.error("Error in getQuotesByCategory:", error);
+    console.error('Error in getQuotesByCategory:', error);
     res
       .status(500)
-      .json(createErrorResponse("Failed to fetch quotes by category"));
+      .json(createErrorResponse('Failed to fetch quotes by category'));
   }
 };

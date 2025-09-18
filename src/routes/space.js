@@ -1,10 +1,10 @@
-import express from "express";
+import express from 'express';
 import {
   getAPOD,
   getPlanetByName,
   getPlanets,
   getSpaceLaunches,
-} from "../controllers/spaceController.js";
+} from '../controllers/spaceController.js';
 
 const router = express.Router();
 
@@ -72,7 +72,7 @@ const router = express.Router();
  *                             example: "Cape Canaveral"
  *                       details:
  *                         type: string
- *                         example: "SpaceX's Falcon 9 rocket will launch the 8th batch of Starlink satellites to low Earth orbit."
+ *                         example: 'SpaceX Falcon 9 launch'
  *                       upcoming:
  *                         type: boolean
  *                         example: true
@@ -80,7 +80,7 @@ const router = express.Router();
  *                   type: string
  *                   example: "Space launches retrieved successfully"
  */
-router.get("/launches", getSpaceLaunches);
+router.get('/launches', getSpaceLaunches);
 
 /**
  * @swagger
@@ -110,7 +110,7 @@ router.get("/launches", getSpaceLaunches);
  *                       example: "M94: A Ring of Star Formation"
  *                     explanation:
  *                       type: string
- *                       example: "Why does this galaxy have a ring of bright blue stars..."
+ *                       example: 'Why does this galaxy have bright blue stars?'
  *                     hdurl:
  *                       type: string
  *                       example: "https://apod.nasa.gov/apod/image/2509/M94_HubbleSchmidt_960.jpg"
@@ -122,12 +122,12 @@ router.get("/launches", getSpaceLaunches);
  *                       example: "image"
  *                     copyright:
  *                       type: string
- *                       example: "Image Credit: NASA, ESA, Hubble, HLA; Reprocessing & Copyright: Robert Gendler"
+ *                       example: 'NASA, ESA, Hubble - Robert Gendler'
  *                 message:
  *                   type: string
- *                   example: "Astronomy Picture of the Day retrieved successfully"
+ *                   example: 'APOD retrieved successfully'
  */
-router.get("/apod", getAPOD);
+router.get('/apod', getAPOD);
 
 /**
  * @swagger
@@ -202,12 +202,12 @@ router.get("/apod", getAPOD);
  *                             example: 15
  *                       description:
  *                         type: string
- *                         example: "Earth is the only known planet with life and liquid water on its surface."
+ *                         example: 'Earth has life and liquid water'
  *                 message:
  *                   type: string
  *                   example: "Planetary data retrieved successfully"
  */
-router.get("/planets", getPlanets);
+router.get('/planets', getPlanets);
 
 /**
  * @swagger
@@ -229,6 +229,6 @@ router.get("/planets", getPlanets);
  *       404:
  *         description: Planet not found
  */
-router.get("/planets/:name", getPlanetByName);
+router.get('/planets/:name', getPlanetByName);
 
 export default router;

@@ -1,5 +1,5 @@
-import express from "express";
-import { getClientIP, getIPDetails } from "../controllers/ipController.js";
+import express from 'express';
+import { getClientIP, getIPDetails } from '../controllers/ipController.js';
 
 const router = express.Router();
 
@@ -15,7 +15,7 @@ const router = express.Router();
  *         name: fields
  *         schema:
  *           type: string
- *         description: Comma-separated list of fields to return (e.g., ip,userAgent)
+ *         description: Comma-separated list of fields
  *         example: ip,timestamp
  *     responses:
  *       200:
@@ -47,7 +47,7 @@ const router = express.Router();
  *             schema:
  *               $ref: '#/components/schemas/Error'
  */
-router.get("/", getClientIP);
+router.get('/', getClientIP);
 
 /**
  * @swagger
@@ -68,7 +68,7 @@ router.get("/", getClientIP);
  *         name: fields
  *         schema:
  *           type: string
- *         description: Comma-separated list of fields to return (e.g., city,country,isp)
+ *         description: Comma-separated list of fields
  *         example: city,country,isp
  *     responses:
  *       200:
@@ -124,6 +124,6 @@ router.get("/", getClientIP);
  *             schema:
  *               $ref: '#/components/schemas/Error'
  */
-router.get("/:ip", getIPDetails);
+router.get('/:ip', getIPDetails);
 
 export default router;

@@ -1,9 +1,9 @@
-import express from "express";
+import express from 'express';
 import {
   getAllJokes,
   getDevJoke,
   getRandomJoke,
-} from "../controllers/jokesController.js";
+} from '../controllers/jokesController.js';
 
 const router = express.Router();
 
@@ -12,7 +12,7 @@ const router = express.Router();
  * /api/jokes:
  *   get:
  *     summary: Get all jokes with filtering and pagination
- *     description: Retrieve a list of jokes with optional filtering and pagination
+ *     description: Retrieve a list of jokes
  *     tags: [Jokes]
  *     parameters:
  *       - in: query
@@ -86,7 +86,7 @@ const router = express.Router();
  *             schema:
  *               $ref: '#/components/schemas/Error'
  */
-router.get("/", getAllJokes);
+router.get('/', getAllJokes);
 
 /**
  * @swagger
@@ -129,7 +129,7 @@ router.get("/", getAllJokes);
  *             schema:
  *               $ref: '#/components/schemas/Error'
  */
-router.get("/random", getRandomJoke);
+router.get('/random', getRandomJoke);
 
 /**
  * @swagger
@@ -164,6 +164,6 @@ router.get("/random", getRandomJoke);
  *             schema:
  *               $ref: '#/components/schemas/Error'
  */
-router.get("/dev", getDevJoke);
+router.get('/dev', getDevJoke);
 
 export default router;

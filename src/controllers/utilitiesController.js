@@ -1,5 +1,5 @@
-import { v4 as uuidv4 } from "uuid";
-import { createErrorResponse, createResponse } from "../utils/apiHelpers.js";
+import { v4 as uuidv4 } from 'uuid';
+import { createErrorResponse, createResponse } from '../utils/apiHelpers.js';
 
 export const generateUUID = (req, res) => {
   try {
@@ -7,66 +7,66 @@ export const generateUUID = (req, res) => {
 
     res.json(
       createResponse({
-        uuid: uuid,
+        uuid,
         timestamp: new Date().toISOString(),
       })
     );
   } catch (error) {
-    console.error("Error in generateUUID:", error);
-    res.status(500).json(createErrorResponse("Failed to generate UUID"));
+    console.error('Error in generateUUID:', error);
+    res.status(500).json(createErrorResponse('Failed to generate UUID'));
   }
 };
 
 export const generateLoremIpsum = (req, res) => {
   try {
-    const { type = "paragraphs", count = 1 } = req.query;
+    const { type = 'paragraphs', count = 1 } = req.query;
     const numCount = parseInt(count, 10);
 
     if (numCount < 1 || numCount > 10) {
       return res
         .status(400)
-        .json(createErrorResponse("Count must be between 1 and 10", 400));
+        .json(createErrorResponse('Count must be between 1 and 10', 400));
     }
 
-    let loremText = "";
+    let loremText = '';
 
     // Simple Lorem Ipsum generator
     const loremWords = [
-      "lorem",
-      "ipsum",
-      "dolor",
-      "sit",
-      "amet",
-      "consectetur",
-      "adipiscing",
-      "elit",
-      "sed",
-      "do",
-      "eiusmod",
-      "tempor",
-      "incididunt",
-      "ut",
-      "labore",
-      "et",
-      "dolore",
-      "magna",
-      "aliqua",
-      "enim",
-      "ad",
-      "minim",
-      "veniam",
-      "quis",
-      "nostrud",
-      "exercitation",
+      'lorem',
+      'ipsum',
+      'dolor',
+      'sit',
+      'amet',
+      'consectetur',
+      'adipiscing',
+      'elit',
+      'sed',
+      'do',
+      'eiusmod',
+      'tempor',
+      'incididunt',
+      'ut',
+      'labore',
+      'et',
+      'dolore',
+      'magna',
+      'aliqua',
+      'enim',
+      'ad',
+      'minim',
+      'veniam',
+      'quis',
+      'nostrud',
+      'exercitation',
     ];
 
-    if (type === "words") {
+    if (type === 'words') {
       const words = [];
       for (let i = 0; i < numCount; i++) {
         words.push(loremWords[Math.floor(Math.random() * loremWords.length)]);
       }
-      loremText = words.join(" ");
-    } else if (type === "sentences") {
+      loremText = words.join(' ');
+    } else if (type === 'sentences') {
       const sentences = [];
       for (let i = 0; i < numCount; i++) {
         const sentenceLength = Math.floor(Math.random() * 10) + 5;
@@ -74,9 +74,9 @@ export const generateLoremIpsum = (req, res) => {
         for (let j = 0; j < sentenceLength; j++) {
           words.push(loremWords[Math.floor(Math.random() * loremWords.length)]);
         }
-        sentences.push(words.join(" ") + ".");
+        sentences.push(`${words.join(' ')}.`);
       }
-      loremText = sentences.join(" ");
+      loremText = sentences.join(' ');
     } else {
       // paragraphs (default)
       const paragraphs = [];
@@ -91,25 +91,25 @@ export const generateLoremIpsum = (req, res) => {
               loremWords[Math.floor(Math.random() * loremWords.length)]
             );
           }
-          sentences.push(words.join(" ") + ".");
+          sentences.push(`${words.join(' ')}.`);
         }
-        paragraphs.push(sentences.join(" "));
+        paragraphs.push(sentences.join(' '));
       }
-      loremText = paragraphs.join("\n\n");
+      loremText = paragraphs.join('\n\n');
     }
 
     res.json(
       createResponse({
-        type: type,
+        type,
         count: numCount,
         text: loremText,
       })
     );
   } catch (error) {
-    console.error("Error in generateLoremIpsum:", error);
+    console.error('Error in generateLoremIpsum:', error);
     res
       .status(500)
-      .json(createErrorResponse("Failed to generate Lorem Ipsum text"));
+      .json(createErrorResponse('Failed to generate Lorem Ipsum text'));
   }
 };
 
@@ -122,17 +122,18 @@ export const generateRandomNumber = (req, res) => {
     if (isNaN(minNum) || isNaN(maxNum)) {
       return res
         .status(400)
-        .json(createErrorResponse("Min and max must be valid numbers", 400));
+        .json(createErrorResponse('Min and max must be valid numbers', 400));
     }
 
     if (minNum >= maxNum) {
       return res
         .status(400)
-        .json(createErrorResponse("Min must be less than max", 400));
+        .json(createErrorResponse('Min must be less than max', 400));
     }
 
-    const randomNumber =
-      Math.floor(Math.random() * (maxNum - minNum + 1)) + minNum;
+    const randomNumber = Math.floor(
+      Math.random() * (maxNum - minNum + 1)
+    ) + minNum;
 
     res.json(
       createResponse({
@@ -143,51 +144,50 @@ export const generateRandomNumber = (req, res) => {
       })
     );
   } catch (error) {
-    console.error("Error in generateRandomNumber:", error);
+    console.error('Error in generateRandomNumber:', error);
     res
       .status(500)
-      .json(createErrorResponse("Failed to generate random number"));
+      .json(createErrorResponse('Failed to generate random number'));
   }
 };
 
 export const generateQRCode = (req, res) => {
   try {
-    const { text, size = 256, format = "png" } = req.query;
+    const { text, size = 256, format = 'png' } = req.query;
 
     if (!text) {
       return res
         .status(400)
-        .json(createErrorResponse("Text parameter is required", 400));
+        .json(createErrorResponse('Text parameter is required', 400));
     }
 
     if (text.length > 1000) {
       return res
         .status(400)
         .json(
-          createErrorResponse("Text must be less than 1000 characters", 400)
+          createErrorResponse('Text must be less than 1000 characters', 400)
         );
     }
 
     // Generate QR code URL using Google Charts API (free and reliable)
     const encodedText = encodeURIComponent(text);
-    const qrUrl = `https://chart.googleapis.com/chart?chs=${size}x${size}&cht=qr&chl=${encodedText}&choe=UTF-8`;
 
     // Alternative: QR Server API
     const qrServerUrl = `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encodedText}`;
 
     res.json(
       createResponse({
-        text: text,
+        text,
         qr_code_url: qrServerUrl,
-        size: size,
-        format: format,
+        size,
+        format,
         generated_at: new Date().toISOString(),
-        note: "QR code URLs are generated dynamically. For production use, consider implementing server-side generation.",
+        note: 'QR code URLs are generated dynamically. For production use, consider implementing server-side generation.',
       })
     );
   } catch (error) {
-    console.error("Error in generateQRCode:", error);
-    res.status(500).json(createErrorResponse("Failed to generate QR code"));
+    console.error('Error in generateQRCode:', error);
+    res.status(500).json(createErrorResponse('Failed to generate QR code'));
   }
 };
 
@@ -195,32 +195,32 @@ export const generateBarcode = (req, res) => {
   try {
     const {
       data,
-      type = "code128",
+      type = 'code128',
       width = 2,
       height = 100,
-      format = "png",
+      format = 'png',
     } = req.query;
 
     if (!data) {
       return res
         .status(400)
-        .json(createErrorResponse("Data parameter is required", 400));
+        .json(createErrorResponse('Data parameter is required', 400));
     }
 
     if (data.length > 50) {
       return res
         .status(400)
-        .json(createErrorResponse("Data must be less than 50 characters", 400));
+        .json(createErrorResponse('Data must be less than 50 characters', 400));
     }
 
     // Validate barcode type
-    const validTypes = ["code128", "code39", "ean13", "ean8", "upca", "upce"];
+    const validTypes = ['code128', 'code39', 'ean13', 'ean8', 'upca', 'upce'];
     if (!validTypes.includes(type.toLowerCase())) {
       return res
         .status(400)
         .json(
           createErrorResponse(
-            `Invalid barcode type. Valid types: ${validTypes.join(", ")}`,
+            `Invalid barcode type. Valid types: ${validTypes.join(', ')}`,
             400
           )
         );
@@ -232,18 +232,18 @@ export const generateBarcode = (req, res) => {
 
     res.json(
       createResponse({
-        data: data,
+        data,
         barcode_type: type,
         barcode_url: barcodeUrl,
-        width: width,
-        height: height,
-        format: format,
+        width,
+        height,
+        format,
         generated_at: new Date().toISOString(),
-        note: "Barcode URLs are generated dynamically. For production use, consider implementing server-side generation.",
+        note: 'Barcode URLs are generated dynamically. For production use, consider implementing server-side generation.',
       })
     );
   } catch (error) {
-    console.error("Error in generateBarcode:", error);
-    res.status(500).json(createErrorResponse("Failed to generate barcode"));
+    console.error('Error in generateBarcode:', error);
+    res.status(500).json(createErrorResponse('Failed to generate barcode'));
   }
 };

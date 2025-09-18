@@ -1,10 +1,10 @@
-import express from "express";
+import express from 'express';
 import {
   getDeveloperStats,
   getGithubTrending,
   getNpmTrending,
   getStackoverflowTrending,
-} from "../controllers/developerController.js";
+} from '../controllers/developerController.js';
 
 const router = express.Router();
 
@@ -13,14 +13,14 @@ const router = express.Router();
  * /api/v1/developer/github-trending:
  *   get:
  *     summary: Get GitHub trending repositories
- *     description: Retrieve trending GitHub repositories with filtering and sorting options
+ *     description: Retrieve trending GitHub repos with filtering options
  *     tags: [Developer APIs]
  *     parameters:
  *       - in: query
  *         name: language
  *         schema:
  *           type: string
- *         description: Filter by programming language (e.g., JavaScript, Python, TypeScript)
+ *         description: Filter by programming language
  *       - in: query
  *         name: limit
  *         schema:
@@ -93,7 +93,7 @@ const router = express.Router();
  *                   type: string
  *                   example: "Failed to fetch GitHub trending data"
  */
-router.get("/github-trending", getGithubTrending);
+router.get('/github-trending', getGithubTrending);
 
 /**
  * @swagger
@@ -151,7 +151,7 @@ router.get("/github-trending", getGithubTrending);
  *                             example: "18.2.0"
  *                           description:
  *                             type: string
- *                             example: "React is a JavaScript library for building user interfaces"
+ *                             example: 'React is a JS library for building UIs'
  *                       downloads:
  *                         type: integer
  *                         example: 12500000
@@ -175,14 +175,14 @@ router.get("/github-trending", getGithubTrending);
  *                   type: string
  *                   example: "Failed to fetch npm trending data"
  */
-router.get("/npm-trending", getNpmTrending);
+router.get('/npm-trending', getNpmTrending);
 
 /**
  * @swagger
  * /api/v1/developer/stackoverflow-trending:
  *   get:
  *     summary: Get StackOverflow trending questions
- *     description: Retrieve trending StackOverflow questions with filtering options
+ *     description: Retrieve trending StackOverflow questions
  *     tags: [Developer APIs]
  *     parameters:
  *       - in: query
@@ -235,7 +235,7 @@ router.get("/npm-trending", getNpmTrending);
  *                         example: 12345678
  *                       title:
  *                         type: string
- *                         example: "How to properly type React hooks with TypeScript?"
+ *                         example: 'How to type React hooks with TS?'
  *                       tags:
  *                         type: array
  *                         items:
@@ -270,14 +270,14 @@ router.get("/npm-trending", getNpmTrending);
  *                   type: string
  *                   example: "Failed to fetch StackOverflow trending data"
  */
-router.get("/stackoverflow-trending", getStackoverflowTrending);
+router.get('/stackoverflow-trending', getStackoverflowTrending);
 
 /**
  * @swagger
  * /api/v1/developer/stats:
  *   get:
  *     summary: Get developer ecosystem statistics
- *     description: Retrieve comprehensive statistics across GitHub, npm, and StackOverflow
+ *     description: Retrieve comprehensive dev statistics
  *     tags: [Developer APIs]
  *     responses:
  *       200:
@@ -309,7 +309,7 @@ router.get("/stackoverflow-trending", getStackoverflowTrending);
  *                           type: array
  *                           items:
  *                             type: string
- *                           example: ["TypeScript", "JavaScript", "Rust", "C++"]
+ *                           example: ['TypeScript', 'JavaScript', 'Rust']
  *                     npm:
  *                       type: object
  *                       properties:
@@ -341,7 +341,7 @@ router.get("/stackoverflow-trending", getStackoverflowTrending);
  *                           type: array
  *                           items:
  *                             type: string
- *                           example: ["react", "typescript", "javascript", "async-await", "promises"]
+ *                           example: ['react', 'typescript', 'javascript']
  *       500:
  *         description: Server error
  *         content:
@@ -356,6 +356,6 @@ router.get("/stackoverflow-trending", getStackoverflowTrending);
  *                   type: string
  *                   example: "Failed to fetch developer statistics"
  */
-router.get("/stats", getDeveloperStats);
+router.get('/stats', getDeveloperStats);
 
 export default router;

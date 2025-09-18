@@ -13,15 +13,15 @@ export const applyFilters = (data, filters) => {
 
   Object.keys(filters).forEach((key) => {
     if (
-      filters[key] !== undefined &&
-      filters[key] !== null &&
-      filters[key] !== ""
+      filters[key] !== undefined
+      && filters[key] !== null
+      && filters[key] !== ''
     ) {
       filteredData = filteredData.filter((item) => {
         const itemValue = item[key];
         const filterValue = filters[key];
 
-        if (typeof itemValue === "string" && typeof filterValue === "string") {
+        if (typeof itemValue === 'string' && typeof filterValue === 'string') {
           return itemValue.toLowerCase().includes(filterValue.toLowerCase());
         }
 
@@ -54,7 +54,7 @@ export const applySearch = (data, searchTerm, searchFields) => {
   return data.filter((item) => {
     return searchFields.some((field) => {
       const value = item[field];
-      if (typeof value === "string") {
+      if (typeof value === 'string') {
         return value.toLowerCase().includes(searchTerm.toLowerCase());
       }
       if (Array.isArray(value)) {
@@ -76,7 +76,7 @@ export const applySearch = (data, searchTerm, searchFields) => {
 export const applySorting = (data, sortBy) => {
   if (!sortBy) return data;
 
-  const isDescending = sortBy.startsWith("-");
+  const isDescending = sortBy.startsWith('-');
   const field = isDescending ? sortBy.substring(1) : sortBy;
 
   return [...data].sort((a, b) => {
@@ -84,13 +84,13 @@ export const applySorting = (data, sortBy) => {
     const bValue = b[field];
 
     // Handle string comparison
-    if (typeof aValue === "string" && typeof bValue === "string") {
+    if (typeof aValue === 'string' && typeof bValue === 'string') {
       const comparison = aValue.localeCompare(bValue);
       return isDescending ? -comparison : comparison;
     }
 
     // Handle numeric comparison
-    if (typeof aValue === "number" && typeof bValue === "number") {
+    if (typeof aValue === 'number' && typeof bValue === 'number') {
       return isDescending ? bValue - aValue : aValue - bValue;
     }
 
@@ -122,9 +122,9 @@ export const applyPagination = (data, page = 1, limit = 10) => {
     data: paginatedData,
     pagination: {
       page: currentPage,
-      limit: limit,
-      total: total,
-      totalPages: totalPages,
+      limit,
+      total,
+      totalPages,
       hasNext: currentPage < totalPages,
       hasPrev: currentPage > 1,
     },
@@ -142,9 +142,9 @@ export const parseQueryParams = (query) => {
   return {
     page: parseInt(page, 10),
     limit: parseInt(limit, 10),
-    sort: sort,
-    search: search,
-    filters: filters,
+    sort,
+    search,
+    filters,
   };
 };
 
@@ -158,7 +158,7 @@ export const parseQueryParams = (query) => {
 export const createResponse = (data, pagination = null, message = null) => {
   const response = {
     success: true,
-    data: data,
+    data,
   };
 
   if (pagination) {
@@ -182,8 +182,8 @@ export const createErrorResponse = (message, statusCode = 500) => {
   return {
     success: false,
     error: {
-      message: message,
-      statusCode: statusCode,
+      message,
+      statusCode,
     },
   };
 };

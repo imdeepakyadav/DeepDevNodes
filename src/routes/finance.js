@@ -1,11 +1,11 @@
-import express from "express";
+import express from 'express';
 import {
   convertCurrency,
   getAllCrypto,
   getAllStocks,
   getCryptoBySymbol,
   getStockBySymbol,
-} from "../controllers/financeController.js";
+} from '../controllers/financeController.js';
 
 const router = express.Router();
 
@@ -72,7 +72,7 @@ const router = express.Router();
  *                   type: string
  *                   example: "Cryptocurrency data retrieved successfully"
  */
-router.get("/crypto", getAllCrypto);
+router.get('/crypto', getAllCrypto);
 
 /**
  * @swagger
@@ -94,7 +94,7 @@ router.get("/crypto", getAllCrypto);
  *       404:
  *         description: Cryptocurrency not found
  */
-router.get("/crypto/:symbol", getCryptoBySymbol);
+router.get('/crypto/:symbol', getCryptoBySymbol);
 
 /**
  * @swagger
@@ -165,7 +165,7 @@ router.get("/crypto/:symbol", getCryptoBySymbol);
  *                   type: string
  *                   example: "Stock data retrieved successfully"
  */
-router.get("/stocks", getAllStocks);
+router.get('/stocks', getAllStocks);
 
 /**
  * @swagger
@@ -187,7 +187,7 @@ router.get("/stocks", getAllStocks);
  *       404:
  *         description: Stock not found
  */
-router.get("/stocks/:symbol", getStockBySymbol);
+router.get('/stocks/:symbol', getStockBySymbol);
 
 /**
  * @swagger
@@ -251,13 +251,13 @@ router.get("/stocks/:symbol", getStockBySymbol);
  *                       example: "2025-09-17T12:00:00.000Z"
  *                     note:
  *                       type: string
- *                       example: "Exchange rates are for demonstration purposes only"
+ *                       example: 'Exchange rates are for demonstration'
  *                 message:
  *                   type: string
  *                   example: "Currency conversion completed successfully"
  *       400:
  *         description: Invalid parameters or unsupported currency pair
  */
-router.get("/currency/convert", convertCurrency);
+router.get('/currency/convert', convertCurrency);
 
 export default router;

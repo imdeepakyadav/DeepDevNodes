@@ -1,14 +1,14 @@
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
-import { createErrorResponse, createResponse } from "../utils/apiHelpers.js";
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { createErrorResponse, createResponse } from '../utils/apiHelpers.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Load facts data
-const factsPath = path.join(__dirname, "../data/facts.json");
-const factsData = JSON.parse(fs.readFileSync(factsPath, "utf8"));
+const factsPath = path.join(__dirname, '../data/facts.json');
+const factsData = JSON.parse(fs.readFileSync(factsPath, 'utf8'));
 
 export const getRandomFact = (req, res) => {
   try {
@@ -39,8 +39,8 @@ export const getRandomFact = (req, res) => {
 
     res.json(createResponse(randomFact));
   } catch (error) {
-    console.error("Error in getRandomFact:", error);
-    res.status(500).json(createErrorResponse("Failed to fetch random fact"));
+    console.error('Error in getRandomFact:', error);
+    res.status(500).json(createErrorResponse('Failed to fetch random fact'));
   }
 };
 
@@ -74,16 +74,16 @@ export const getFactsByCategory = (req, res) => {
         page: pageNum,
         limit: limitNum,
         total: categoryFacts.length,
-        totalPages: totalPages,
+        totalPages,
         hasNext: pageNum < totalPages,
         hasPrev: pageNum > 1,
       })
     );
   } catch (error) {
-    console.error("Error in getFactsByCategory:", error);
+    console.error('Error in getFactsByCategory:', error);
     res
       .status(500)
-      .json(createErrorResponse("Failed to fetch facts by category"));
+      .json(createErrorResponse('Failed to fetch facts by category'));
   }
 };
 
@@ -113,13 +113,13 @@ export const getAllFacts = (req, res) => {
         page: pageNum,
         limit: limitNum,
         total: filteredFacts.length,
-        totalPages: totalPages,
+        totalPages,
         hasNext: pageNum < totalPages,
         hasPrev: pageNum > 1,
       })
     );
   } catch (error) {
-    console.error("Error in getAllFacts:", error);
-    res.status(500).json(createErrorResponse("Failed to fetch facts"));
+    console.error('Error in getAllFacts:', error);
+    res.status(500).json(createErrorResponse('Failed to fetch facts'));
   }
 };

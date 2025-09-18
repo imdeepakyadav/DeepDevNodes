@@ -38,8 +38,8 @@ const updateCryptoData = async () => {
     const cryptoData = response.data
       .filter(
         (coin, index, self) =>
-          index ===
-          self.findIndex(
+          index
+          === self.findIndex(
             (c) => c.symbol.toUpperCase() === coin.symbol.toUpperCase()
           )
       )

@@ -1,5 +1,5 @@
-import express from "express";
-import { getCountryTime } from "../controllers/timeController.js";
+import express from 'express';
+import { getCountryTime } from '../controllers/timeController.js';
 
 const router = express.Router();
 
@@ -22,7 +22,7 @@ const router = express.Router();
  *         name: tz
  *         schema:
  *           type: string
- *         description: Specific timezone override (e.g., America/New_York, Asia/Kolkata)
+ *         description: Specific timezone override
  *         example: America/New_York
  *     responses:
  *       200:
@@ -69,6 +69,6 @@ const router = express.Router();
  *             schema:
  *               $ref: '#/components/schemas/Error'
  */
-router.get("/:country", getCountryTime);
+router.get('/:country', getCountryTime);
 
 export default router;

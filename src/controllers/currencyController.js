@@ -1,8 +1,15 @@
-import { createErrorResponse, createResponse } from "../utils/apiHelpers.js";
+import { createErrorResponse, createResponse } from '../utils/apiHelpers.js';
 
-// Mock exchange rates (in production, use a real API like fixer.io or exchangerate-api.com)
+// Mock exchange rates (use real API in production)
 const exchangeRates = {
-  USD: { EUR: 0.85, GBP: 0.73, INR: 74.5, JPY: 110.0, CAD: 1.25, AUD: 1.35 },
+  USD: {
+    EUR: 0.85,
+    GBP: 0.73,
+    INR: 74.5,
+    JPY: 110.0,
+    CAD: 1.25,
+    AUD: 1.35,
+  },
   EUR: { USD: 1.18, GBP: 0.86, INR: 87.6, JPY: 129.0, CAD: 1.47, AUD: 1.59 },
   GBP: { USD: 1.37, EUR: 1.16, INR: 101.8, JPY: 150.0, CAD: 1.71, AUD: 1.85 },
   INR: {
@@ -37,7 +44,7 @@ export const convertCurrency = (req, res) => {
         .status(400)
         .json(
           createErrorResponse(
-            "Missing required parameters: from, to, amount",
+            'Missing required parameters: from, to, amount',
             400
           )
         );
@@ -54,7 +61,7 @@ export const convertCurrency = (req, res) => {
         .json(
           createErrorResponse(
             `Unsupported currency: ${fromCurrency}. Supported: ${supportedCurrencies.join(
-              ", "
+              ', '
             )}`,
             400
           )
@@ -67,7 +74,7 @@ export const convertCurrency = (req, res) => {
         .json(
           createErrorResponse(
             `Unsupported currency: ${toCurrency}. Supported: ${supportedCurrencies.join(
-              ", "
+              ', '
             )}`,
             400
           )
@@ -78,7 +85,7 @@ export const convertCurrency = (req, res) => {
     if (isNaN(amountNum) || amountNum <= 0) {
       return res
         .status(400)
-        .json(createErrorResponse("Amount must be a positive number", 400));
+        .json(createErrorResponse('Amount must be a positive number', 400));
     }
 
     // Get exchange rate
@@ -108,15 +115,15 @@ export const convertCurrency = (req, res) => {
         from: fromCurrency,
         to: toCurrency,
         amount: amountNum,
-        rate: rate,
+        rate,
         convertedAmount: Math.round(convertedAmount * 100) / 100,
         inverseRate: Math.round(inverseRate * 100) / 100,
         timestamp: new Date().toISOString(),
-        note: "Exchange rates are for demonstration purposes only",
+        note: 'Exchange rates are for demonstration purposes only',
       })
     );
   } catch (error) {
-    console.error("Error in convertCurrency:", error);
-    res.status(500).json(createErrorResponse("Failed to convert currency"));
+    console.error('Error in convertCurrency:', error);
+    res.status(500).json(createErrorResponse('Failed to convert currency'));
   }
 };

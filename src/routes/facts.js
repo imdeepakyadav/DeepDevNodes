@@ -1,9 +1,9 @@
-import express from "express";
+import express from 'express';
 import {
   getAllFacts,
   getFactsByCategory,
   getRandomFact,
-} from "../controllers/factsController.js";
+} from '../controllers/factsController.js';
 
 const router = express.Router();
 
@@ -12,14 +12,14 @@ const router = express.Router();
  * /api/facts:
  *   get:
  *     summary: Get all facts with optional filtering and pagination
- *     description: Retrieve a list of facts with optional category filtering and pagination
+ *     description: Retrieve a list of facts
  *     tags: [Facts]
  *     parameters:
  *       - in: query
  *         name: category
  *         schema:
  *           type: string
- *         description: Filter by category (science, history, animals, food, technology, space, myths)
+ *         description: Filter by categories
  *         example: science
  *       - in: query
  *         name: limit
@@ -79,7 +79,7 @@ const router = express.Router();
  *             schema:
  *               $ref: '#/components/schemas/Error'
  */
-router.get("/", getAllFacts);
+router.get('/', getAllFacts);
 
 /**
  * @swagger
@@ -121,14 +121,14 @@ router.get("/", getAllFacts);
  *             schema:
  *               $ref: '#/components/schemas/Error'
  */
-router.get("/random", getRandomFact);
+router.get('/random', getRandomFact);
 
 /**
  * @swagger
  * /api/facts/{category}:
  *   get:
  *     summary: Get facts by category
- *     description: Retrieve facts filtered by a specific category with pagination
+ *     description: Retrieve facts filtered
  *     tags: [Facts]
  *     parameters:
  *       - in: path
@@ -136,7 +136,7 @@ router.get("/random", getRandomFact);
  *         required: true
  *         schema:
  *           type: string
- *         description: Fact category (science, history, animals, food, technology, space, myths)
+ *         description: Fact category
  *         example: science
  *       - in: query
  *         name: limit
@@ -202,6 +202,6 @@ router.get("/random", getRandomFact);
  *             schema:
  *               $ref: '#/components/schemas/Error'
  */
-router.get("/:category", getFactsByCategory);
+router.get('/:category', getFactsByCategory);
 
 export default router;
