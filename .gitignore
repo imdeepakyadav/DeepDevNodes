@@ -203,3 +203,7 @@ k8s/
 
 # Custom
 # Add any project-specific files to ignore
+
+# Issue creation script outputs
+issue-commands.txt
+create-all-issues.sh
