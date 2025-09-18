@@ -1,0 +1,37 @@
+{{
+
+  "version": 2,  "version": 2,
+
+  "functions": {  "functions": {
+
+    "src/server.js": {    "src/server.js": {
+
+      "maxDuration": 30      "maxDuration": 30
+
+    }    }
+
+  },  },
+
+  "routes": [  "routes": [
+
+    {    {
+
+      "src": "/(.*)",      "src": "/(.*)",
+
+      "dest": "src/server.js"      "dest": "src/server.js"
+
+    }    }
+
+  ],  ],
+
+  "env": {  "env": {
+
+    "NODE_ENV": "production"    "NODE_ENV": "production"
+
+  },  }
+
+  "includeFiles": [}
+
+    "public/**"
+  ]
+}

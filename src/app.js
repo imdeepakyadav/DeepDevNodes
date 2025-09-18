@@ -38,12 +38,77 @@ app.use(express.urlencoded({ extended: true }));
 // Rate limiting
 app.use(rateLimiter);
 
+// Serve static files from public directory
+app.use(express.static('public'));
+
 // Swagger documentation
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Serve landing page at root
 app.get('/', (req, res) => {
-  res.sendFile(path.join(process.cwd(), 'public', 'index.html'));
+  try {
+    const filePath = path.join(process.cwd(), 'public', 'index.html');
+    console.log('Serving file from:', filePath); // Debug log
+    res.sendFile(filePath, (err) => {
+      if (err) {
+        console.error('Error serving file:', err);
+        // Fallback: serve a simple HTML page
+        res.status(200).send(`
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepDevNodes API - Loading...</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 50px;
+            margin: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        h1 { font-size: 3rem; margin-bottom: 20px; }
+        p { font-size: 1.2rem; opacity: 0.9; }
+        .links { margin-top: 30px; }
+        .links a {
+            color: #00d4ff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 500;
+        }
+        .links a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 DeepDevNodes</h1>
+        <p>A comprehensive REST API providing access to various data sources including financial data, space information, GitHub statistics, and more.</p>
+        <div class="links">
+            <a href="/docs">📚 API Documentation</a>
+            <a href="/health">❤️ Health Check</a>
+            <a href="/api/countries">🌍 Try Countries API</a>
+        </div>
+    </div>
+</body>
+</html>`);
+      }
+    });
+  } catch (error) {
+    console.error('Error in root route:', error);
+    res.status(500).json({
+      success: false,
+      error: {
+        message: 'Internal server error',
+        details: error.message,
+      },
+    });
+  }
 });
 
 // API Routes
