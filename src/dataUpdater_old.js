@@ -7,7 +7,7 @@ import {
   NpmPackage,
   StackOverflowQuestion,
   SpaceLaunch,
-  APOD
+  APOD,
 } from './models/index.js';
 
 // API Keys from environment variables
@@ -20,19 +20,22 @@ const updateCryptoData = async () => {
   try {
     console.log('Fetching cryptocurrency data...');
 
-    const response = await axios.get('https://api.coingecko.com/api/v3/coins/markets', {
-      params: {
-        vs_currency: 'usd',
-        order: 'market_cap_desc',
-        per_page: 100,
-        page: 1,
-        sparkline: false,
-        price_change_percentage: '24h'
-      },
-      timeout: 10000
-    });
+    const response = await axios.get(
+      'https://api.coingecko.com/api/v3/coins/markets',
+      {
+        params: {
+          vs_currency: 'usd',
+          order: 'market_cap_desc',
+          per_page: 100,
+          page: 1,
+          sparkline: false,
+          price_change_percentage: '24h',
+        },
+        timeout: 10000,
+      }
+    );
 
-    const cryptoData = response.data.map(coin => ({
+    const cryptoData = response.data.map((coin) => ({
       symbol: coin.symbol.toUpperCase(),
       name: coin.name,
       price: coin.current_price,
@@ -45,15 +48,17 @@ const updateCryptoData = async () => {
       supply: {
         circulating: coin.circulating_supply,
         total: coin.total_supply,
-        max: coin.max_supply
-      }
+        max: coin.max_supply,
+      },
     }));
 
     // Clear existing data and insert new data
     await Crypto.deleteMany({});
     await Crypto.insertMany(cryptoData);
 
-    console.log(`✅ Cryptocurrency data updated successfully - ${cryptoData.length} records`);
+    console.log(
+      `✅ Cryptocurrency data updated successfully - ${cryptoData.length} records`
+    );
     return cryptoData;
   } catch (error) {
     console.error('❌ Failed to fetch cryptocurrency data:', error.message);
@@ -66,14 +71,25 @@ const updateCryptoData = async () => {
  */
 const updateStockData = async () => {
   if (!ALPHA_VANTAGE_API_KEY) {
-    console.log('⚠️  Alpha Vantage API key not configured, skipping stock data update');
+    console.log(
+      '⚠️  Alpha Vantage API key not configured, skipping stock data update'
+    );
     return;
   }
 
   try {
     console.log('Fetching stock data...');
 
-    const symbols = ['AAPL', 'GOOGL', 'MSFT', 'AMZN', 'TSLA', 'META', 'NVDA', 'NFLX'];
+    const symbols = [
+      'AAPL',
+      'GOOGL',
+      'MSFT',
+      'AMZN',
+      'TSLA',
+      'META',
+      'NVDA',
+      'NFLX',
+    ];
     const stockData = [];
 
     for (const symbol of symbols) {
@@ -82,9 +98,9 @@ const updateStockData = async () => {
           params: {
             function: 'GLOBAL_QUOTE',
             symbol,
-            apikey: ALPHA_VANTAGE_API_KEY
+            apikey: ALPHA_VANTAGE_API_KEY,
           },
-          timeout: 5000
+          timeout: 5000,
         });
 
         const quote = response.data['Global Quote'];
@@ -94,7 +110,9 @@ const updateStockData = async () => {
             name: getCompanyName(symbol),
             price: parseFloat(quote['05. price']),
             change: parseFloat(quote['09. change'] || 0),
-            change_percent: parseFloat(quote['10. change percent']?.replace('%', '') || 0),
+            change_percent: parseFloat(
+              quote['10. change percent']?.replace('%', '') || 0
+            ),
             volume: parseInt(quote['06. volume'] || 0),
             market_cap: getMarketCap(symbol),
             pe_ratio: getPERatio(symbol),
@@ -102,12 +120,12 @@ const updateStockData = async () => {
             last_updated: new Date(),
             exchange: 'NASDAQ',
             sector: getSector(symbol),
-            industry: getIndustry(symbol)
+            industry: getIndustry(symbol),
           });
         }
 
         // Rate limiting - Alpha Vantage free tier allows 5 calls per minute
-        await new Promise(resolve => setTimeout(resolve, 12000));
+        await new Promise((resolve) => setTimeout(resolve, 12000));
       } catch (error) {
         console.error(`❌ Failed to fetch data for ${symbol}:`, error.message);
       }
@@ -117,7 +135,9 @@ const updateStockData = async () => {
       // Clear existing data and insert new data
       await Stock.deleteMany({});
       await Stock.insertMany(stockData);
-      console.log(`✅ Stock data updated successfully - ${stockData.length} records`);
+      console.log(
+        `✅ Stock data updated successfully - ${stockData.length} records`
+      );
     }
     return stockData;
   } catch (error) {
@@ -133,22 +153,27 @@ const updateGithubData = async () => {
   try {
     console.log('Fetching GitHub trending data...');
 
-    const headers = GITHUB_TOKEN ? { Authorization: `token ${GITHUB_TOKEN}` } : {};
+    const headers = GITHUB_TOKEN
+      ? { Authorization: `token ${GITHUB_TOKEN}` }
+      : {};
 
     // GitHub doesn't have an official trending API, so we'll use GitHub Search API
-    const response = await axios.get('https://api.github.com/search/repositories', {
-      params: {
-        q: 'stars:>1000',
-        sort: 'stars',
-        order: 'desc',
-        per_page: 10
-      },
-      headers: {
-        ...headers,
-        Accept: 'application/vnd.github.v3+json'
-      },
-      timeout: 10000
-    });
+    const response = await axios.get(
+      'https://api.github.com/search/repositories',
+      {
+        params: {
+          q: 'stars:>1000',
+          sort: 'stars',
+          order: 'desc',
+          per_page: 10,
+        },
+        headers: {
+          ...headers,
+          Accept: 'application/vnd.github.v3+json',
+        },
+        timeout: 10000,
+      }
+    );
 
     const githubData = response.data.items.slice(0, 5).map((repo, index) => ({
       rank: index + 1,
@@ -161,22 +186,26 @@ const updateGithubData = async () => {
       owner: {
         login: repo.owner.login,
         avatar_url: repo.owner.avatar_url,
-        type: repo.owner.type
+        type: repo.owner.type,
       },
       url: repo.html_url,
-      builtBy: [{
-        username: repo.owner.login,
-        href: `https://github.com/${repo.owner.login}`,
-        avatar: repo.owner.avatar_url
-      }],
-      last_updated: new Date()
+      builtBy: [
+        {
+          username: repo.owner.login,
+          href: `https://github.com/${repo.owner.login}`,
+          avatar: repo.owner.avatar_url,
+        },
+      ],
+      last_updated: new Date(),
     }));
 
     // Clear existing data and insert new data
     await GitHubRepo.deleteMany({});
     await GitHubRepo.insertMany(githubData);
 
-    console.log(`✅ GitHub trending data updated successfully - ${githubData.length} records`);
+    console.log(
+      `✅ GitHub trending data updated successfully - ${githubData.length} records`
+    );
     return githubData;
   } catch (error) {
     console.error('❌ Failed to fetch GitHub trending data:', error.message);
@@ -197,9 +226,12 @@ const updateNpmData = async () => {
     for (let i = 0; i < packageNames.length; i++) {
       const packageName = packageNames[i];
       try {
-        const packageResponse = await axios.get(`https://registry.npmjs.org/${packageName}/latest`, {
-          timeout: 5000
-        });
+        const packageResponse = await axios.get(
+          `https://registry.npmjs.org/${packageName}/latest`,
+          {
+            timeout: 5000,
+          }
+        );
 
         const packageInfo = packageResponse.data;
         npmData.push({
@@ -210,20 +242,23 @@ const updateNpmData = async () => {
             description: packageInfo.description,
             keywords: packageInfo.keywords || [],
             author: packageInfo.author || { name: 'Unknown' },
-            license: packageInfo.license || 'MIT'
+            license: packageInfo.license || 'MIT',
           },
           downloads: Math.floor(Math.random() * 10000000) + 1000000, // Mock download count
-          downloadsChange: (Math.random() * 10) - 2, // Random change between -2% and +8%
+          downloadsChange: Math.random() * 10 - 2, // Random change between -2% and +8%
           stars: Math.floor(Math.random() * 100000) + 10000,
           publisher: {
             username: packageInfo.maintainers?.[0]?.name || 'unknown',
-            email: packageInfo.maintainers?.[0]?.email || ''
+            email: packageInfo.maintainers?.[0]?.email || '',
           },
           maintainers: packageInfo.maintainers || [],
-          last_updated: new Date()
+          last_updated: new Date(),
         });
       } catch (error) {
-        console.error(`❌ Failed to fetch npm data for ${packageName}:`, error.message);
+        console.error(
+          `❌ Failed to fetch npm data for ${packageName}:`,
+          error.message
+        );
       }
     }
 
@@ -231,7 +266,9 @@ const updateNpmData = async () => {
     await NpmPackage.deleteMany({});
     await NpmPackage.insertMany(npmData);
 
-    console.log(`✅ npm trending data updated successfully - ${npmData.length} records`);
+    console.log(
+      `✅ npm trending data updated successfully - ${npmData.length} records`
+    );
     return npmData;
   } catch (error) {
     console.error('❌ Failed to fetch npm trending data:', error.message);
@@ -251,19 +288,22 @@ const updateStackoverflowData = async () => {
 
     for (const tag of tags) {
       try {
-        const response = await axios.get('https://api.stackexchange.com/2.3/questions', {
-          params: {
-            order: 'desc',
-            sort: 'votes',
-            tagged: tag,
-            site: 'stackoverflow',
-            pagesize: 2,
-            filter: 'withbody'
-          },
-          timeout: 10000
-        });
+        const response = await axios.get(
+          'https://api.stackexchange.com/2.3/questions',
+          {
+            params: {
+              order: 'desc',
+              sort: 'votes',
+              tagged: tag,
+              site: 'stackoverflow',
+              pagesize: 2,
+              filter: 'withbody',
+            },
+            timeout: 10000,
+          }
+        );
 
-        response.data.items.forEach(question => {
+        response.data.items.forEach((question) => {
           if (stackoverflowData.length < 5) {
             stackoverflowData.push({
               question_id: question.question_id,
@@ -281,17 +321,20 @@ const updateStackoverflowData = async () => {
                 reputation: question.owner.reputation,
                 user_type: question.owner.user_type,
                 profile_image: question.owner.profile_image,
-                link: question.owner.link
+                link: question.owner.link,
               },
               is_answered: question.is_answered,
               accepted_answer_id: question.accepted_answer_id,
               link: question.link,
-              last_updated: new Date()
+              last_updated: new Date(),
             });
           }
         });
       } catch (error) {
-        console.error(`❌ Failed to fetch StackOverflow data for tag ${tag}:`, error.message);
+        console.error(
+          `❌ Failed to fetch StackOverflow data for tag ${tag}:`,
+          error.message
+        );
       }
     }
 
@@ -303,10 +346,15 @@ const updateStackoverflowData = async () => {
     await StackOverflowQuestion.deleteMany({});
     await StackOverflowQuestion.insertMany(topQuestions);
 
-    console.log(`✅ StackOverflow trending data updated successfully - ${topQuestions.length} records`);
+    console.log(
+      `✅ StackOverflow trending data updated successfully - ${topQuestions.length} records`
+    );
     return topQuestions;
   } catch (error) {
-    console.error('❌ Failed to fetch StackOverflow trending data:', error.message);
+    console.error(
+      '❌ Failed to fetch StackOverflow trending data:',
+      error.message
+    );
     throw error;
   }
 };
@@ -318,11 +366,14 @@ const updateSpaceLaunchesData = async () => {
   try {
     console.log('Fetching space launches data...');
 
-    const response = await axios.get('https://api.spacexdata.com/v4/launches/upcoming', {
-      timeout: 10000
-    });
+    const response = await axios.get(
+      'https://api.spacexdata.com/v4/launches/upcoming',
+      {
+        timeout: 10000,
+      }
+    );
 
-    const launchesData = response.data.slice(0, 3).map(launch => ({
+    const launchesData = response.data.slice(0, 3).map((launch) => ({
       id: launch.id,
       name: launch.name,
       date_utc: new Date(launch.date_utc),
@@ -330,58 +381,60 @@ const updateSpaceLaunchesData = async () => {
       rocket: {
         id: launch.rocket,
         name: 'Falcon 9', // Simplified
-        type: 'FT'
+        type: 'FT',
       },
       launchpad: {
         id: launch.launchpad,
         name: 'Launch Complex 39A', // Simplified
         locality: 'Cape Canaveral',
-        region: 'Florida'
+        region: 'Florida',
       },
-      payloads: launch.payloads.map(payload => ({
+      payloads: launch.payloads.map((payload) => ({
         id: payload,
         name: `Payload ${payload.substring(0, 8)}`,
         type: 'Satellite',
         orbit: 'LEO',
-        customers: ['SpaceX']
+        customers: ['SpaceX'],
       })),
-      cores: [{
-        core: '5e9e28a7f359183c413b265d',
-        flight: 1,
-        gridfins: true,
-        legs: true,
-        reused: true,
-        landing_attempt: true,
-        landing_success: null,
-        landing_type: 'ASDS',
-        landpad: '5e9e3032383ecb6bb234e7ca'
-      }],
+      cores: [
+        {
+          core: '5e9e28a7f359183c413b265d',
+          flight: 1,
+          gridfins: true,
+          legs: true,
+          reused: true,
+          landing_attempt: true,
+          landing_success: null,
+          landing_type: 'ASDS',
+          landpad: '5e9e3032383ecb6bb234e7ca',
+        },
+      ],
       fairings: {
         reused: false,
         recovery_attempt: false,
         recovered: false,
-        ships: []
+        ships: [],
       },
       links: {
         patch: {
           small: 'https://images2.imgbox.com/53/22/dh0XSLXO_o.png',
-          large: 'https://images2.imgbox.com/15/2b/NAcsTEB6_o.png'
+          large: 'https://images2.imgbox.com/15/2b/NAcsTEB6_o.png',
         },
         reddit: {
           campaign: null,
           launch: null,
           media: null,
-          recovery: null
+          recovery: null,
         },
         flickr: {
           small: [],
-          original: []
+          original: [],
         },
         presskit: null,
         webcast: 'https://www.youtube.com/watch?v=0a_00nJ_Y88',
         youtube_id: '0a_00nJ_Y88',
         article: null,
-        wikipedia: 'https://en.wikipedia.org/wiki/Starlink'
+        wikipedia: 'https://en.wikipedia.org/wiki/Starlink',
       },
       static_fire_date_utc: null,
       static_fire_date_unix: null,
@@ -395,14 +448,16 @@ const updateSpaceLaunchesData = async () => {
       ships: [],
       capsules: [],
       payloads_ids: launch.payloads,
-      last_updated: new Date()
+      last_updated: new Date(),
     }));
 
     // Clear existing data and insert new data
     await SpaceLaunch.deleteMany({});
     await SpaceLaunch.insertMany(launchesData);
 
-    console.log(`✅ Space launches data updated successfully - ${launchesData.length} records`);
+    console.log(
+      `✅ Space launches data updated successfully - ${launchesData.length} records`
+    );
     return launchesData;
   } catch (error) {
     console.error('❌ Failed to fetch space launches data:', error.message);
@@ -420,9 +475,9 @@ const updateApodData = async () => {
     const NASA_API_KEY = process.env.NASA_API_KEY || 'DEMO_KEY';
     const response = await axios.get('https://api.nasa.gov/planetary/apod', {
       params: {
-        api_key: NASA_API_KEY
+        api_key: NASA_API_KEY,
       },
-      timeout: 10000
+      timeout: 10000,
     });
 
     const apodData = {
@@ -433,7 +488,7 @@ const updateApodData = async () => {
       hdurl: response.data.hdurl,
       media_type: response.data.media_type,
       service_version: response.data.service_version,
-      last_updated: new Date()
+      last_updated: new Date(),
     };
 
     // Clear existing data and insert new data
@@ -463,7 +518,7 @@ const updateAllData = async () => {
       updateNpmData(),
       updateStackoverflowData(),
       updateSpaceLaunchesData(),
-      updateApodData()
+      updateApodData(),
     ]);
 
     const endTime = Date.now();
@@ -503,7 +558,7 @@ const getCompanyName = (symbol) => {
     TSLA: 'Tesla Inc.',
     META: 'Meta Platforms Inc.',
     NVDA: 'NVIDIA Corporation',
-    NFLX: 'Netflix Inc.'
+    NFLX: 'Netflix Inc.',
   };
   return names[symbol] || symbol;
 };
@@ -517,7 +572,7 @@ const getMarketCap = (symbol) => {
     TSLA: 800000000000,
     META: 900000000000,
     NVDA: 1200000000000,
-    NFLX: 200000000000
+    NFLX: 200000000000,
   };
   return caps[symbol] || 100000000000;
 };
@@ -539,7 +594,7 @@ const getSector = (symbol) => {
     TSLA: 'Consumer Discretionary',
     META: 'Technology',
     NVDA: 'Technology',
-    NFLX: 'Communication Services'
+    NFLX: 'Communication Services',
   };
   return sectors[symbol] || 'Technology';
 };
@@ -553,7 +608,7 @@ const getIndustry = (symbol) => {
     TSLA: 'Auto Manufacturers',
     META: 'Internet Content & Information',
     NVDA: 'Semiconductors',
-    NFLX: 'Entertainment'
+    NFLX: 'Entertainment',
   };
   return industries[symbol] || 'Software';
 };
@@ -568,7 +623,7 @@ export {
   updateSpaceLaunchesData,
   updateApodData,
   scheduleDailyUpdates,
-  manualUpdate
+  manualUpdate,
 };
 
 /**
@@ -615,19 +670,22 @@ const updateCryptoData = async () => {
   try {
     console.log('Fetching cryptocurrency data...');
 
-    const response = await axios.get('https://api.coingecko.com/api/v3/coins/markets', {
-      params: {
-        vs_currency: 'usd',
-        order: 'market_cap_desc',
-        per_page: 100,
-        page: 1,
-        sparkline: false,
-        price_change_percentage: '24h'
-      },
-      timeout: 10000
-    });
+    const response = await axios.get(
+      'https://api.coingecko.com/api/v3/coins/markets',
+      {
+        params: {
+          vs_currency: 'usd',
+          order: 'market_cap_desc',
+          per_page: 100,
+          page: 1,
+          sparkline: false,
+          price_change_percentage: '24h',
+        },
+        timeout: 10000,
+      }
+    );
 
-    const cryptoData = response.data.map(coin => ({
+    const cryptoData = response.data.map((coin) => ({
       symbol: coin.symbol.toUpperCase(),
       name: coin.name,
       price: coin.current_price,
@@ -640,15 +698,17 @@ const updateCryptoData = async () => {
       supply: {
         circulating: coin.circulating_supply,
         total: coin.total_supply,
-        max: coin.max_supply
-      }
+        max: coin.max_supply,
+      },
     }));
 
     // Clear existing data and insert new data
     await Crypto.deleteMany({});
     await Crypto.insertMany(cryptoData);
 
-    console.log(`✅ Cryptocurrency data updated successfully - ${cryptoData.length} records`);
+    console.log(
+      `✅ Cryptocurrency data updated successfully - ${cryptoData.length} records`
+    );
     return cryptoData;
   } catch (error) {
     console.error('❌ Failed to fetch cryptocurrency data:', error.message);
@@ -662,53 +722,53 @@ const updateCryptoData = async () => {
 const updateStockData = async () => {
   if (!ALPHA_VANTAGE_API_KEY) {
     console.log(
-      "⚠️  Alpha Vantage API key not configured, skipping stock data update"
+      '⚠️  Alpha Vantage API key not configured, skipping stock data update'
     );
     return;
   }
 
   try {
-    console.log("Fetching stock data...");
+    console.log('Fetching stock data...');
 
     const symbols = [
-      "AAPL",
-      "GOOGL",
-      "MSFT",
-      "AMZN",
-      "TSLA",
-      "META",
-      "NVDA",
-      "NFLX",
+      'AAPL',
+      'GOOGL',
+      'MSFT',
+      'AMZN',
+      'TSLA',
+      'META',
+      'NVDA',
+      'NFLX',
     ];
     const stockData = [];
 
     for (const symbol of symbols) {
       try {
-        const response = await axios.get("https://www.alphavantage.co/query", {
+        const response = await axios.get('https://www.alphavantage.co/query', {
           params: {
-            function: "GLOBAL_QUOTE",
+            function: 'GLOBAL_QUOTE',
             symbol: symbol,
             apikey: ALPHA_VANTAGE_API_KEY,
           },
           timeout: 5000,
         });
 
-        const quote = response.data["Global Quote"];
-        if (quote && quote["05. price"]) {
+        const quote = response.data['Global Quote'];
+        if (quote && quote['05. price']) {
           stockData.push({
             symbol: symbol,
             name: getCompanyName(symbol),
-            price: parseFloat(quote["05. price"]),
-            change: parseFloat(quote["09. change"] || 0),
+            price: parseFloat(quote['05. price']),
+            change: parseFloat(quote['09. change'] || 0),
             change_percent: parseFloat(
-              quote["10. change percent"]?.replace("%", "") || 0
+              quote['10. change percent']?.replace('%', '') || 0
             ),
-            volume: parseInt(quote["06. volume"] || 0),
+            volume: parseInt(quote['06. volume'] || 0),
             market_cap: getMarketCap(symbol),
             pe_ratio: getPERatio(symbol),
             dividend_yield: getDividendYield(symbol),
             last_updated: new Date(),
-            exchange: "NASDAQ",
+            exchange: 'NASDAQ',
             sector: getSector(symbol),
             industry: getIndustry(symbol),
           });
@@ -725,11 +785,13 @@ const updateStockData = async () => {
       // Clear existing data and insert new data
       await Stock.deleteMany({});
       await Stock.insertMany(stockData);
-      console.log(`✅ Stock data updated successfully - ${stockData.length} records`);
+      console.log(
+        `✅ Stock data updated successfully - ${stockData.length} records`
+      );
     }
     return stockData;
   } catch (error) {
-    console.error("❌ Failed to fetch stock data:", error.message);
+    console.error('❌ Failed to fetch stock data:', error.message);
     throw error;
   }
 };
@@ -739,7 +801,7 @@ const updateStockData = async () => {
  */
 const updateGithubData = async () => {
   try {
-    console.log("Fetching GitHub trending data...");
+    console.log('Fetching GitHub trending data...');
 
     const headers = GITHUB_TOKEN
       ? { Authorization: `token ${GITHUB_TOKEN}` }
@@ -747,17 +809,17 @@ const updateGithubData = async () => {
 
     // GitHub doesn't have an official trending API, so we'll use GitHub Search API
     const response = await axios.get(
-      "https://api.github.com/search/repositories",
+      'https://api.github.com/search/repositories',
       {
         params: {
-          q: "stars:>1000",
-          sort: "stars",
-          order: "desc",
+          q: 'stars:>1000',
+          sort: 'stars',
+          order: 'desc',
           per_page: 10,
         },
         headers: {
           ...headers,
-          Accept: "application/vnd.github.v3+json",
+          Accept: 'application/vnd.github.v3+json',
         },
         timeout: 10000,
       }
@@ -790,10 +852,12 @@ const updateGithubData = async () => {
     await GitHubRepo.deleteMany({});
     await GitHubRepo.insertMany(githubData);
 
-    console.log(`✅ GitHub trending data updated successfully - ${githubData.length} records`);
+    console.log(
+      `✅ GitHub trending data updated successfully - ${githubData.length} records`
+    );
     return githubData;
   } catch (error) {
-    console.error("❌ Failed to fetch GitHub trending data:", error.message);
+    console.error('❌ Failed to fetch GitHub trending data:', error.message);
     throw error;
   }
 };
@@ -803,17 +867,17 @@ const updateGithubData = async () => {
  */
 const updateNpmData = async () => {
   try {
-    console.log("Fetching npm trending data...");
+    console.log('Fetching npm trending data...');
 
     // Using npm API to get download stats
     const response = await axios.get(
-      "https://api.npmjs.org/downloads/range/last-week/react,express,lodash,axios,typescript",
+      'https://api.npmjs.org/downloads/range/last-week/react,express,lodash,axios,typescript',
       {
         timeout: 10000,
       }
     );
 
-    const packageNames = ["react", "lodash", "axios", "express", "typescript"];
+    const packageNames = ['react', 'lodash', 'axios', 'express', 'typescript'];
     const npmData = [];
 
     for (let i = 0; i < packageNames.length; i++) {
@@ -834,15 +898,15 @@ const updateNpmData = async () => {
             version: packageInfo.version,
             description: packageInfo.description,
             keywords: packageInfo.keywords || [],
-            author: packageInfo.author || { name: "Unknown" },
-            license: packageInfo.license || "Unknown",
+            author: packageInfo.author || { name: 'Unknown' },
+            license: packageInfo.license || 'Unknown',
           },
           downloads: Math.floor(Math.random() * 10000000) + 1000000, // Mock download count
           downloadsChange: Math.random() * 10 - 2, // Random change between -2% and +8%
           stars: Math.floor(Math.random() * 100000) + 10000,
           publisher: {
-            username: packageInfo.maintainers?.[0]?.name || "unknown",
-            email: packageInfo.maintainers?.[0]?.email || "",
+            username: packageInfo.maintainers?.[0]?.name || 'unknown',
+            email: packageInfo.maintainers?.[0]?.email || '',
           },
           maintainers: packageInfo.maintainers || [],
         });
@@ -858,10 +922,12 @@ const updateNpmData = async () => {
     await NpmPackage.deleteMany({});
     await NpmPackage.insertMany(npmData);
 
-    console.log(`✅ npm trending data updated successfully - ${npmData.length} records`);
+    console.log(
+      `✅ npm trending data updated successfully - ${npmData.length} records`
+    );
     return npmData;
   } catch (error) {
-    console.error("❌ Failed to fetch npm trending data:", error.message);
+    console.error('❌ Failed to fetch npm trending data:', error.message);
     throw error;
   }
 };
@@ -871,23 +937,23 @@ const updateNpmData = async () => {
  */
 const updateStackoverflowData = async () => {
   try {
-    console.log("Fetching StackOverflow trending data...");
+    console.log('Fetching StackOverflow trending data...');
 
-    const tags = ["javascript", "react", "node.js", "python", "typescript"];
+    const tags = ['javascript', 'react', 'node.js', 'python', 'typescript'];
     const stackoverflowData = [];
 
     for (const tag of tags) {
       try {
         const response = await axios.get(
-          "https://api.stackexchange.com/2.3/questions",
+          'https://api.stackexchange.com/2.3/questions',
           {
             params: {
-              order: "desc",
-              sort: "votes",
+              order: 'desc',
+              sort: 'votes',
               tagged: tag,
-              site: "stackoverflow",
+              site: 'stackoverflow',
               pagesize: 2,
-              filter: "withbody",
+              filter: 'withbody',
             },
             timeout: 10000,
           }
@@ -898,7 +964,7 @@ const updateStackoverflowData = async () => {
             stackoverflowData.push({
               question_id: question.question_id,
               title: question.title,
-              body: question.body.substring(0, 200) + "...",
+              body: question.body.substring(0, 200) + '...',
               tags: question.tags,
               score: question.score,
               view_count: question.view_count,
@@ -939,11 +1005,13 @@ const updateStackoverflowData = async () => {
     await StackOverflowQuestion.deleteMany({});
     await StackOverflowQuestion.insertMany(topQuestions);
 
-    console.log(`✅ StackOverflow trending data updated successfully - ${topQuestions.length} records`);
+    console.log(
+      `✅ StackOverflow trending data updated successfully - ${topQuestions.length} records`
+    );
     return topQuestions;
   } catch (error) {
     console.error(
-      "❌ Failed to fetch StackOverflow trending data:",
+      '❌ Failed to fetch StackOverflow trending data:',
       error.message
     );
     throw error;
@@ -955,10 +1023,10 @@ const updateStackoverflowData = async () => {
  */
 const updateSpaceLaunchesData = async () => {
   try {
-    console.log("Fetching space launches data...");
+    console.log('Fetching space launches data...');
 
     const response = await axios.get(
-      "https://api.spacexdata.com/v4/launches/upcoming",
+      'https://api.spacexdata.com/v4/launches/upcoming',
       {
         timeout: 10000,
       }
@@ -971,33 +1039,33 @@ const updateSpaceLaunchesData = async () => {
       date_local: launch.date_local,
       rocket: {
         id: launch.rocket,
-        name: "Falcon 9", // Simplified
-        type: "FT",
+        name: 'Falcon 9', // Simplified
+        type: 'FT',
       },
       launchpad: {
         id: launch.launchpad,
-        name: "Launch Complex 39A", // Simplified
-        locality: "Cape Canaveral",
-        region: "Florida",
+        name: 'Launch Complex 39A', // Simplified
+        locality: 'Cape Canaveral',
+        region: 'Florida',
       },
       payloads: launch.payloads.map((payload) => ({
         id: payload,
         name: `Payload ${payload.substring(0, 8)}`,
-        type: "Satellite",
-        orbit: "LEO",
-        customers: ["SpaceX"],
+        type: 'Satellite',
+        orbit: 'LEO',
+        customers: ['SpaceX'],
       })),
       cores: [
         {
-          core: "5e9e28a7f359183c413b265d",
+          core: '5e9e28a7f359183c413b265d',
           flight: 1,
           gridfins: true,
           legs: true,
           reused: true,
           landing_attempt: true,
           landing_success: null,
-          landing_type: "ASDS",
-          landpad: "5e9e3032383ecb6bb234e7ca",
+          landing_type: 'ASDS',
+          landpad: '5e9e3032383ecb6bb234e7ca',
         },
       ],
       fairings: {
@@ -1008,8 +1076,8 @@ const updateSpaceLaunchesData = async () => {
       },
       links: {
         patch: {
-          small: "https://images2.imgbox.com/53/22/dh0XSLXO_o.png",
-          large: "https://images2.imgbox.com/15/2b/NAcsTEB6_o.png",
+          small: 'https://images2.imgbox.com/53/22/dh0XSLXO_o.png',
+          large: 'https://images2.imgbox.com/15/2b/NAcsTEB6_o.png',
         },
         reddit: {
           campaign: null,
@@ -1022,10 +1090,10 @@ const updateSpaceLaunchesData = async () => {
           original: [],
         },
         presskit: null,
-        webcast: "https://www.youtube.com/watch?v=0a_00nJ_Y88",
-        youtube_id: "0a_00nJ_Y88",
+        webcast: 'https://www.youtube.com/watch?v=0a_00nJ_Y88',
+        youtube_id: '0a_00nJ_Y88',
         article: null,
-        wikipedia: "https://en.wikipedia.org/wiki/Starlink",
+        wikipedia: 'https://en.wikipedia.org/wiki/Starlink',
       },
       static_fire_date_utc: null,
       static_fire_date_unix: null,
@@ -1045,10 +1113,12 @@ const updateSpaceLaunchesData = async () => {
     await SpaceLaunch.deleteMany({});
     await SpaceLaunch.insertMany(launchesData);
 
-    console.log(`✅ Space launches data updated successfully - ${launchesData.length} records`);
+    console.log(
+      `✅ Space launches data updated successfully - ${launchesData.length} records`
+    );
     return launchesData;
   } catch (error) {
-    console.error("❌ Failed to fetch space launches data:", error.message);
+    console.error('❌ Failed to fetch space launches data:', error.message);
     throw error;
   }
 };
@@ -1058,10 +1128,10 @@ const updateSpaceLaunchesData = async () => {
  */
 const updateApodData = async () => {
   try {
-    console.log("Fetching APOD data...");
+    console.log('Fetching APOD data...');
 
-    const NASA_API_KEY = process.env.NASA_API_KEY || "DEMO_KEY";
-    const response = await axios.get("https://api.nasa.gov/planetary/apod", {
+    const NASA_API_KEY = process.env.NASA_API_KEY || 'DEMO_KEY';
+    const response = await axios.get('https://api.nasa.gov/planetary/apod', {
       params: {
         api_key: NASA_API_KEY,
       },
@@ -1086,7 +1156,7 @@ const updateApodData = async () => {
     console.log('✅ APOD data updated successfully');
     return apodData;
   } catch (error) {
-    console.error("❌ Failed to fetch APOD data:", error.message);
+    console.error('❌ Failed to fetch APOD data:', error.message);
     throw error;
   }
 };
@@ -1096,7 +1166,7 @@ const updateApodData = async () => {
  */
 const updateAllData = async () => {
   const startTime = Date.now();
-  console.log("🚀 Starting daily data update...");
+  console.log('🚀 Starting daily data update...');
 
   try {
     await Promise.allSettled([
@@ -1112,7 +1182,7 @@ const updateAllData = async () => {
     const endTime = Date.now();
     console.log(`✅ All data updated successfully in ${endTime - startTime}ms`);
   } catch (error) {
-    console.error("❌ Data update process failed:", error.message);
+    console.error('❌ Data update process failed:', error.message);
   }
 };
 
@@ -1121,12 +1191,12 @@ const updateAllData = async () => {
  */
 const scheduleDailyUpdates = () => {
   // Run at 2:00 AM daily
-  cron.schedule("0 2 * * *", () => {
-    console.log("📅 Scheduling daily data updates at: 0 2 * * *");
+  cron.schedule('0 2 * * *', () => {
+    console.log('📅 Scheduling daily data updates at: 0 2 * * *');
     updateAllData();
   });
 
-  console.log("📅 Scheduling daily data updates at: 0 2 * * *");
+  console.log('📅 Scheduling daily data updates at: 0 2 * * *');
 };
 
 /**
@@ -1139,14 +1209,14 @@ const manualUpdate = async () => {
 // Helper functions for stock data
 const getCompanyName = (symbol) => {
   const names = {
-    AAPL: "Apple Inc.",
-    GOOGL: "Alphabet Inc.",
-    MSFT: "Microsoft Corporation",
-    AMZN: "Amazon.com Inc.",
-    TSLA: "Tesla Inc.",
-    META: "Meta Platforms Inc.",
-    NVDA: "NVIDIA Corporation",
-    NFLX: "Netflix Inc.",
+    AAPL: 'Apple Inc.',
+    GOOGL: 'Alphabet Inc.',
+    MSFT: 'Microsoft Corporation',
+    AMZN: 'Amazon.com Inc.',
+    TSLA: 'Tesla Inc.',
+    META: 'Meta Platforms Inc.',
+    NVDA: 'NVIDIA Corporation',
+    NFLX: 'Netflix Inc.',
   };
   return names[symbol] || symbol;
 };
@@ -1175,30 +1245,30 @@ const getDividendYield = (symbol) => {
 
 const getSector = (symbol) => {
   const sectors = {
-    AAPL: "Technology",
-    GOOGL: "Technology",
-    MSFT: "Technology",
-    AMZN: "Consumer Discretionary",
-    TSLA: "Consumer Discretionary",
-    META: "Technology",
-    NVDA: "Technology",
-    NFLX: "Communication Services",
+    AAPL: 'Technology',
+    GOOGL: 'Technology',
+    MSFT: 'Technology',
+    AMZN: 'Consumer Discretionary',
+    TSLA: 'Consumer Discretionary',
+    META: 'Technology',
+    NVDA: 'Technology',
+    NFLX: 'Communication Services',
   };
-  return sectors[symbol] || "Technology";
+  return sectors[symbol] || 'Technology';
 };
 
 const getIndustry = (symbol) => {
   const industries = {
-    AAPL: "Consumer Electronics",
-    GOOGL: "Internet Content & Information",
-    MSFT: "Software",
-    AMZN: "Internet & Direct Marketing Retail",
-    TSLA: "Auto Manufacturers",
-    META: "Internet Content & Information",
-    NVDA: "Semiconductors",
-    NFLX: "Entertainment",
+    AAPL: 'Consumer Electronics',
+    GOOGL: 'Internet Content & Information',
+    MSFT: 'Software',
+    AMZN: 'Internet & Direct Marketing Retail',
+    TSLA: 'Auto Manufacturers',
+    META: 'Internet Content & Information',
+    NVDA: 'Semiconductors',
+    NFLX: 'Entertainment',
   };
-  return industries[symbol] || "Software";
+  return industries[symbol] || 'Software';
 };
 
 export {

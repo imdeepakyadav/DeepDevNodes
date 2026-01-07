@@ -131,7 +131,8 @@ export const generateRandomNumber = (req, res) => {
         .json(createErrorResponse('Min must be less than max', 400));
     }
 
-    const randomNumber = Math.floor(Math.random() * (maxNum - minNum + 1)) + minNum;
+    const randomNumber =
+      Math.floor(Math.random() * (maxNum - minNum + 1)) + minNum;
 
     res.json(
       createResponse({

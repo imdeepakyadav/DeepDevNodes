@@ -70,7 +70,7 @@ const router = express.Router();
  *                       example: "2023-12-01T10:00:00.000Z"
  *                     note:
  *                       type: string
-                        example: 'Exchange rates are for demonstration'
+ *                       example: 'Exchange rates are for demonstration'
  *       400:
  *         description: Invalid parameters or unsupported currencies
  *         content:

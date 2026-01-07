@@ -13,9 +13,9 @@ export const applyFilters = (data, filters) => {
 
   Object.keys(filters).forEach((key) => {
     if (
-      filters[key] !== undefined
-      && filters[key] !== null
-      && filters[key] !== ''
+      filters[key] !== undefined &&
+      filters[key] !== null &&
+      filters[key] !== ''
     ) {
       filteredData = filteredData.filter((item) => {
         const itemValue = item[key];

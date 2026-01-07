@@ -31,6 +31,7 @@
     "vercel-build": "npm run lint",
     "update-data": "node -e \"import('./src/dataUpdater.js').then(m => m.manualUpdate())\"",
     "migrate-data": "node src/migrateData.js",
+    "cleanup-sms": "node src/cleanup-sms-data.js",
     "docker:build": "docker build -t deepdevnodes .",
     "docker:run": "docker run -p 3000:3000 deepdevnodes",
     "docker:up": "docker-compose up -d",
@@ -83,6 +84,7 @@
     "mongoose": "^8.18.1",
     "morgan": "^1.10.0",
     "node-cron": "^4.2.1",
+    "qrcode": "^1.5.4",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.0",
     "uuid": "^9.0.1"

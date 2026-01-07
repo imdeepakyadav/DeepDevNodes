@@ -39,10 +39,11 @@ const mockIPData = {
 export const getClientIP = (req, res) => {
   try {
     // Get client IP address
-    const clientIP =      req.ip
-      || req.connection.remoteAddress
-      || req.socket.remoteAddress
-      || (req.connection.socket ? req.connection.socket.remoteAddress : null);
+    const clientIP =
+      req.ip ||
+      req.connection.remoteAddress ||
+      req.socket.remoteAddress ||
+      (req.connection.socket ? req.connection.socket.remoteAddress : null);
 
     // Clean up IPv4-mapped IPv6 addresses
     const cleanIP = clientIP ? clientIP.replace(/^::ffff:/, '') : 'Unknown';

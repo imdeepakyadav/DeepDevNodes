@@ -20,6 +20,13 @@ import spaceRoutes from './routes/space.js';
 import timeRoutes from './routes/time.js';
 import utilityRoutes from './routes/utilities.js';
 
+// Import communication service routes
+import automationRoutes from './routes/automation.js';
+import messagingRoutes from './routes/messaging.js';
+import qrcodeRoutes from './routes/qrcode.js';
+import voiceRoutes from './routes/voice.js';
+import whatsappRoutes from './routes/whatsapp.js';
+
 // Import middleware
 import errorHandler from './middlewares/errorHandler.js';
 import rateLimiter from './middlewares/rateLimiter.js';
@@ -124,6 +131,13 @@ app.use('/api/fun', funRoutes);
 app.use('/api', financeRoutes);
 app.use('/api/space', spaceRoutes);
 app.use('/api/developer', developerRoutes);
+
+// Communication Service Routes
+app.use('/api/messaging', messagingRoutes);
+app.use('/api/voice', voiceRoutes);
+app.use('/api/whatsapp', whatsappRoutes);
+app.use('/api/qrcode', qrcodeRoutes);
+app.use('/api/automation', automationRoutes);
 
 // Health check endpoint
 app.get('/health', (req, res) => {
