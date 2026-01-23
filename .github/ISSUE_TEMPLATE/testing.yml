@@ -1,0 +1,77 @@
+name: 🧪 Testing Issue
+description: Report issues with tests or suggest test improvements
+title: "[TESTING] "
+labels: ["testing", "good-first-issue"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve our test coverage! Please provide details about the testing issue.
+        
+  - type: dropdown
+    id: type
+    attributes:
+      label: 🧪 Test Type
+      description: What type of testing issue is this?
+      options:
+        - Missing test coverage
+        - Failing test
+        - Flaky test
+        - Test improvement
+        - New test case needed
+        - Test framework issue
+    validations:
+      required: true
+      
+  - type: textarea
+    id: component
+    attributes:
+      label: 🎯 Component/Feature
+      description: Which component or feature needs testing?
+      placeholder: |
+        - Controller: userController.js
+        - Function: validateInput()
+        - Endpoint: /api/users
+        - Feature: User authentication
+    validations:
+      required: true
+      
+  - type: textarea
+    id: description
+    attributes:
+      label: 📝 Description
+      description: Describe the testing issue or improvement needed
+      placeholder: What test coverage is missing or what issue exists?
+    validations:
+      required: true
+      
+  - type: textarea
+    id: test_cases
+    attributes:
+      label: 🔍 Test Cases
+      description: What specific test cases should be added or fixed?
+      placeholder: |
+        - [ ] Test case 1: Valid input handling
+        - [ ] Test case 2: Error handling for invalid input
+        - [ ] Test case 3: Edge case scenarios
+        
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: ✅ Acceptance Criteria
+      description: What conditions must be met for this testing issue to be resolved?
+      placeholder: |
+        - [ ] All test cases pass
+        - [ ] Coverage increases to X%
+        - [ ] Tests are stable and reliable
+        
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: ✅ Checklist
+      description: Please confirm you have done the following
+      options:
+        - label: I have checked existing test coverage
+          required: true
+        - label: I have identified specific test cases needed
+          required: true

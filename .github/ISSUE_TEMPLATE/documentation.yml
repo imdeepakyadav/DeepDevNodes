@@ -1,0 +1,73 @@
+name: 📚 Documentation Issue
+description: Report issues with documentation or suggest improvements
+title: "[DOCS] "
+labels: ["documentation", "good-first-issue"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve our documentation! Please provide details about the documentation issue or improvement.
+        
+  - type: dropdown
+    id: type
+    attributes:
+      label: 📝 Documentation Type
+      description: What type of documentation issue is this?
+      options:
+        - Missing documentation
+        - Incorrect information
+        - Unclear explanation
+        - Typo or grammar error
+        - Broken link
+        - Outdated information
+        - Missing examples
+        - Improvement suggestion
+    validations:
+      required: true
+      
+  - type: textarea
+    id: location
+    attributes:
+      label: 📍 Location
+      description: Where is the documentation issue located?
+      placeholder: |
+        - File: README.md
+        - Section: API Documentation
+        - Line: 123
+        - URL: https://...
+    validations:
+      required: true
+      
+  - type: textarea
+    id: current
+    attributes:
+      label: 📄 Current Content
+      description: What does the current documentation say? (copy/paste if relevant)
+      placeholder: Current text or description of the issue...
+      
+  - type: textarea
+    id: suggested
+    attributes:
+      label: ✏️ Suggested Improvement
+      description: What should the documentation say instead?
+      placeholder: Suggested text or improvement...
+    validations:
+      required: true
+      
+  - type: textarea
+    id: additional
+    attributes:
+      label: 📎 Additional Context
+      description: Any additional context about the documentation issue
+      placeholder: Any additional information that might help...
+      
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: ✅ Checklist
+      description: Please confirm you have done the following
+      options:
+        - label: I have searched for existing documentation issues
+          required: true
+        - label: I have verified this is a documentation issue
+          required: true
